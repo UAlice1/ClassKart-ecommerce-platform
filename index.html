@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassKart - Empowering Learning Through Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFFFF;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #FFFFFF;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #0A5033;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .search-bar {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid #E0E0E0;
+            border-radius: 25px;
+            outline: none;
+            width: 250px;
+            transition: border 0.3s;
+        }
+
+        .search-bar:focus {
+            border-color: #0A5033;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #0A5033;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #0A5033;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 80, 51, 0.85), rgba(10, 80, 51, 0.85)), 
+                        url('/images/student.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 8rem 5%;
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .btn-primary {
+            background-color: #FFFFFF;
+            color: #0A5033;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #F5F5F5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 5rem 5%;
+            background-color: #FFFFFF;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #0A5033;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #0A5033 0%, #0d6b45 100%);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(10, 80, 51, 0.2);
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .category-card:hover::before {
+            opacity: 1;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(10, 80, 51, 0.3);
+        }
+
+        .category-card.active {
+            background: linear-gradient(135deg, #084028 0%, #0A5033 100%);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(10, 80, 51, 0.4);
+        }
+
+        .category-icon {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .category-icon img {
+            height: 100px;
+            width: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .category-card h3 {
+            color: #FFFFFF;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .category-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Featured Products - IMPROVED */
+        .featured-products {
+            padding: 5rem 5%;
+            background-color: #F5F5F5;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        /* FIXED PRODUCT IMAGE STYLING */
+        .product-image {
+            width: 100%;
+            height: 260px;
+            background-color: #F8F8F8;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        /* Product Content Area */
+        .product-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            color: #0A5033;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .product-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+            line-height: 1.4;
+            min-height: 2.8rem;
+            font-weight: 600;
+        }
+
+        .rating {
+            color: #FFA500;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            gap: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0A5033;
+        }
+
+        .btn-add-cart {
+            background-color: #0A5033;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #084028;
+            transform: scale(1.05);
+        }
+
+        /* Professional Footer */
+        footer {
+            background-color: #0A5033;
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #FFFFFF;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #FFFFFF;
+            padding-left: 5px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 0.8rem 1.5rem;
+            background-color: #FFFFFF;
+            color: #0A5033;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #F5F5F5;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #FFFFFF;
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .search-bar {
+                width: 120px;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 5rem 5%;
+                min-height: 450px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .product-image {
+                height: 220px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 40px;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn-primary {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 240px;
+            }
+
+            .product-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-add-cart {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/logo.png" alt="ClassKart Logo">
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <input type="text" class="search-bar" placeholder="Search products...">
+                <div class="cart-icon"><a href="/Cart.html"> 🛒</a>
+                   
+                    <span class="cart-count">0</span>
+                </div>
+                <a href="/Login.html">👤</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Empowering Learning Through Access</h1>
+            <p>Quality educational materials for students, teachers, and parents. Browse our collection of books, stationery, and digital resources.</p>
+            <a href="#shop" class="btn-primary">Shop Now →</a>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="shop">
+        <div class="section-header">
+            <h2>Shop by Category</h2>
+            <p>Browse our carefully curated selection of educational materials</p>
+        </div>
+        <div class="category-grid">
+            <div class="category-card" data-category="books">
+                <div class="category-icon">
+                    <img src="images/unknownbook.jpg" alt="Books">
+                </div>
+                <h3>Books</h3>
+                <p>Textbooks, workbooks, and reference materials for all grades</p>
+            </div>
+            <div class="category-card" data-category="stationery">
+                <div class="category-icon">
+                    <img src="images/penandbooks.jpg" alt="Stationery">
+                </div>
+                <h3>Stationery</h3>
+                <p>Quality pens, pencils, notebooks, and office supplies</p>
+            </div>
+            <div class="category-card" data-category="courses">
+                <div class="category-icon">
+                    <img src="images/laptop.jpg" alt="Courses">
+                </div>
+                <h3>Courses</h3>
+                <p>Digital learning resources and online courses</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="section-header">
+            <h2>Featured Products</h2>
+            <p id="categoryTitle">Discover our most popular educational materials</p>
+        </div>
+        <div class="product-grid" id="productGrid">
+            <!-- Books -->
+            <div class="product-card" data-category="books">
+                <div class="product-image">
+                    <img src="images/biologybook.jpg" alt="Biology Book">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">BOOKS</div>
+                    <h3>Biology Book</h3>
+                    <div class="product-footer">
+                        <span class="price">$49.99</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="books">
+                <div class="product-image">
+                    <img src="images/chembook.jpg" alt="Chemistry Book">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">BOOKS</div>
+                    <h3>Chemistry Book</h3>
+                    <div class="product-footer">
+                        <span class="price">$54.99</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="books">
+                <div class="product-image">
+                    <img src="images/mathe.jpg" alt="Mathematics Book">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">BOOKS</div>
+                    <h3>Mathematics Book</h3>
+                    <div class="product-footer">
+                        <span class="price">$39.99</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="books">
+                <div class="product-image">
+                    <img src="images/geograph.jpg" alt="Geography Book">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">BOOKS</div>
+                    <h3>Geography Book</h3>
+                    <div class="product-footer">
+                        <span class="price">$44.99</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stationery -->
+            <div class="product-card" data-category="stationery">
+                <div class="product-image">
+                    <img src="images/bag.jpg" alt="School Bag">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">STATIONERY</div>
+                    <h3>School Bag</h3>
+                    <div class="product-footer">
+                        <span class="price">$24.99</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="stationery">
+                <div class="product-image">
+                    <img src="images/bagwithpen2.jpg" alt="Bag with Pen">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">STATIONERY</div>
+                    <h3>Bag with Pen</h3>
+                    <div class="product-footer">
+                        <span class="price">$38.99</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="stationery">
+                <div class="product-image">
+                    <img src="images/calculator.jpg" alt="Scientific Calculator">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">STATIONERY</div>
+                    <h3>Scientific Calculator</h3>
+                    <div class="product-footer">
+                        <span class="price">9000Rfw</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="stationery">
+                <div class="product-image">
+                    <img src="images/pencil.jpg" alt="Pencil Set">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">STATIONERY</div>
+                    <h3>Pencil Set</h3>
+                    <div class="product-footer">
+                        <span class="price">10000Frw</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses -->
+            <div class="product-card" data-category="courses">
+                <div class="product-image">
+                    <img src="images/alphabet.jpg" alt="Alphabet Chart">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">COURSES</div>
+                    <h3>Alphabet Chart</h3>
+                    <div class="product-footer">
+                        <span class="price">5000 Rfw</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="courses">
+                <div class="product-image">
+                    <img src="images/laptop.jpg" alt="Laptop for Learning">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">COURSES</div>
+                    <h3>Laptop for Learning</h3>
+                    <div class="product-footer">
+                        <span class="price">5000000 RFW</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="courses">
+                <div class="product-image">
+                    <img src="images/TABle periodic.jpg" alt="Periodic Table Chart">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">COURSES</div>
+                    <h3>Periodic Table Chart</h3>
+                    <div class="product-footer">
+                        <span class="price">$19.99</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="courses">
+                <div class="product-image">
+                    <img src="images/set.jpg" alt="Mathematical Set">
+                </div>
+                <div class="product-content">
+                    <div class="product-category">COURSES</div>
+                    <h3>Mathematical Set</h3>
+                    <div class="product-footer">
+                        <span class="price">$8.99</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ClassKart</h3>
+                <p>Empowering Learning Through Access. Quality educational materials for students, teachers, and parents.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="#shipping">Shipping Info</a></li>
+                    <li><a href="#returns">Returns & Refunds</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms & Conditions</a></li>
+                    <li><a href="#support">Support Center</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get updates on new products and exclusive offers.</p>
+                <form class="newsletter-form" onsubmit="return false;">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 ClassKart. All rights reserved. | Alice & Fidele</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Category filtering
+        const categoryCards = document.querySelectorAll('.category-card');
+        const productCards = document.querySelectorAll('.product-card');
+        const categoryTitle = document.getElementById('categoryTitle');
+        let activeCategory = 'all';
+
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.getAttribute('data-category');
+                
+                // Toggle active state
+                categoryCards.forEach(c => c.classList.remove('active'));
+                
+                if (activeCategory === category) {
+                    // If clicking the same category, show all
+                    activeCategory = 'all';
+                    categoryTitle.textContent = 'Discover our most popular educational materials';
+                    productCards.forEach(product => {
+                        product.classList.remove('hidden');
+                    });
+                } else {
+                    // Show only selected category
+                    card.classList.add('active');
+                    activeCategory = category;
+                    categoryTitle.textContent = `${card.querySelector('h3').textContent} Products`;
+                    
+                    productCards.forEach(product => {
+                        if (product.getAttribute('data-category') === category) {
+                            product.classList.remove('hidden');
+                        } else {
+                            product.classList.add('hidden');
+                        }
+                    });
+                }
+
+                // Scroll to products
+                document.querySelector('.featured-products').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Add to cart functionality
+        let cartCount = 0;
+        const cartCountElement = document.querySelector('.cart-count');
+        const addToCartButtons = document.querySelectorAll('.btn-add-cart');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                cartCount++;
+                cartCountElement.textContent = cartCount;
+                
+                // Add animation
+                button.textContent = 'Added!';
+                button.style.backgroundColor = '#084028';
+                
+                setTimeout(() => {
+                    button.textContent = 'Add to Cart';
+                    button.style.backgroundColor = '#0A5033';
+                }, 1500);
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
