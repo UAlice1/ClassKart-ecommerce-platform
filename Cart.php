@@ -265,8 +265,8 @@
             border-radius: 12px;
             padding: 2rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            height: fit-content;
-            sticky: top: 100px;
+            height:fit-content;
+            sticky-top: 100px;
         }
 
         .order-summary h2 {
@@ -534,7 +534,7 @@
                     🛒
                     <span class="cart-count" id="cartCount">3</span>
                 </div>
-                <a href="#login">👤</a>
+                <a href="/Login.html">Login</a>
             </div>
         </nav>
     </header>

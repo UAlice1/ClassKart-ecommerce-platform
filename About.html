@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ClassKart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFFFF;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #FFFFFF;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #0A5033;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .search-bar {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid #E0E0E0;
+            border-radius: 25px;
+            outline: none;
+            width: 250px;
+            transition: border 0.3s;
+        }
+
+        .search-bar:focus {
+            border-color: #0A5033;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #0A5033;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #0A5033;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero-about {
+            background: linear-gradient(rgba(10, 80, 51, 0.9), rgba(10, 80, 51, 0.9)), 
+                        url('/images/student.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 6rem 5%;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-about h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-about p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .about-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+        }
+
+        .about-section {
+            margin-bottom: 5rem;
+        }
+
+        .about-section h2 {
+            font-size: 2.5rem;
+            color: #0A5033;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            text-align: center;
+        }
+
+        /* Story Section */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .story-content h3 {
+            font-size: 2rem;
+            color: #0A5033;
+            margin-bottom: 1rem;
+        }
+
+        .story-content p {
+            text-align: left;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #0A5033 0%, #0d6b45 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(10, 80, 51, 0.2);
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background-color: #F5F5F5;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(10, 80, 51, 0.15);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.5rem;
+            color: #0A5033;
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            color: #666;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(10, 80, 51, 0.2);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #0A5033 0%, #0d6b45 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .team-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .team-info h3 {
+            font-size: 1.5rem;
+            color: #0A5033;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-info .role {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-info p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background-color: #F5F5F5;
+            padding: 5rem 5%;
+            margin: 5rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #0A5033;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0A5033 0%, #0d6b45 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 5%;
+            border-radius: 15px;
+            margin: 5rem 5%;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #FFFFFF;
+            color: #0A5033;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #F5F5F5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0A5033;
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #FFFFFF;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #FFFFFF;
+            padding-left: 5px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 0.8rem 1.5rem;
+            background-color: #FFFFFF;
+            color: #0A5033;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #F5F5F5;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-about h1 {
+                font-size: 3rem;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #FFFFFF;
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .search-bar {
+                width: 120px;
+            }
+
+            .hero-about {
+                padding: 4rem 5%;
+                min-height: 300px;
+            }
+
+            .hero-about h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-about p {
+                font-size: 1rem;
+            }
+
+            .about-section h2 {
+                font-size: 2rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 40px;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .hero-about h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn-primary {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .values-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/logo.png" alt="ClassKart Logo">
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="About.html" class="active">About</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <input type="text" class="search-bar" placeholder="Search products...">
+                <div class="cart-icon">
+                    <a href="Cart.html">🛒</a>
+                    <span class="cart-count">0</span>
+                </div>
+                <a href="Login.html">Login </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-about">
+        <div>
+            <h1>About ClassKart</h1>
+            <p>Empowering Learning Through Access </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="about-content">
+        <!-- Mission Section -->
+        <section class="about-section">
+            <h2>Our Mission</h2>
+            <p>At ClassKart, we believe that quality education starts with access to the right materials. Our mission is to empower students, teachers, and parents by providing easy access to affordable, high-quality educational resources that inspire learning and foster growth.</p>
+        </section>
+
+        <!-- Story Section -->
+        <section class="about-section">
+            <h2>Our Story</h2>
+            <div class="story-grid">
+                <div class="story-content">
+                    <h3>Where It All Began</h3>
+                    <p>ClassKart was founded in 2025 by Alice and Fidele, two passionate educators who recognized a critical gap in accessing educational materials. They witnessed firsthand how students struggled to find quality resources at affordable prices.</p>
+                    <p>What started as a small initiative to help local students has grown into a comprehensive platform serving thousands of learners across the region. Today, ClassKart stands as a beacon of educational accessibility and excellence.</p>
+                </div>
+                <div class="story-image">
+                    📚 Education for All
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="about-section">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                   
+                    <h3>Quality First</h3>
+                    <p>We carefully curate every product to ensure it meets the highest educational standards and provides real value to our customers.</p>
+                </div>
+                <div class="value-card">
+                    
+                    <h3>Accessibility</h3>
+                    <p>Education should be accessible to everyone. We work tirelessly to keep our prices affordable without compromising on quality.</p>
+                </div>
+                <div class="value-card">
+                   
+                    <h3>Trust & Support</h3>
+                    <p>We build lasting relationships with our customers through exceptional service, transparency, and unwavering support.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Growth & Learning</h3>
+                    <p>We're committed to continuous improvement, always seeking new ways to better serve the educational community.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">5,000+</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1,200+</div>
+                <div class="stat-label">Products Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Schools Partnered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Satisfaction Rate</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <div class="about-content">
+        <section class="about-section">
+            <h2>Meet Our Founders</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-image">👩‍💼</div>
+                    <div class="team-info">
+                        <h3>Alice</h3>
+                        <div class="role">Co-Founder & CEO</div>
+                        <p>With 10+ years in education, Alice brings a wealth of knowledge about student needs and educational excellence to ClassKart.</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">👨‍💼</div>
+                    <div class="team-info">
+                        <h3>Fidele</h3>
+                        <div class="role">Co-Founder & COO</div>
+                        <p>Fidele's expertise in operations and logistics ensures that every product reaches our customers efficiently and on time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+   
+  
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ClassKart</h3>
+                <p>Empowering Learning Through Access. Quality educational materials for students, teachers, and parents.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#shop">Shop</a></li>
+                    <li><a href="About.html">About Us</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="#shipping">Shipping Info</a></li>
+                    <li><a href="#returns">Returns & Refunds</a></li>
+                    <li><a href="#terms">Terms & Conditions</a></li>
+                    <li><a href="#support">Support Center</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get updates on new products and exclusive offers.</p>
+                <form class="newsletter-form" onsubmit="return false;">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 ClassKart. All rights reserved. | Alice & Fidele</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Update cart count from localStorage if available
+        const cartCount = localStorage.getItem('cartCount') || 0;
+        document.querySelector('.cart-count').textContent = cartCount;
+    </script>
+</body>
+</html>

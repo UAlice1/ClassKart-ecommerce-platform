@@ -446,7 +446,7 @@
                     🛒
                     <span class="cart-count">0</span>
                 </div>
-                <a href="login.html">👤</a>
+                <a href="login.html">Login</a>
             </div>
         </nav>
     </header>
@@ -464,8 +464,8 @@
             </div>
 
             <div class="error-message" id="errorMessage"></div>
+             <form id="loginForm" method="POST" action="login_process.php">
 
-            <form id="loginForm" method="POST" action="login_process.php">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
@@ -514,7 +514,6 @@
                     <li><a href="index.html">Shop</a></li>
                     <li><a href="index.html#about">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="#faq">FAQ</a></li>
                 </ul>
             </div>
 

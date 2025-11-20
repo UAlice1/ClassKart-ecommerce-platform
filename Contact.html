@@ -61,7 +61,8 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: #0A5033;
         }
 
@@ -89,6 +90,12 @@
             cursor: pointer;
         }
 
+        .cart-icon a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
         .cart-count {
             position: absolute;
             top: -8px;
@@ -103,6 +110,12 @@
             justify-content: center;
             font-size: 0.75rem;
             font-weight: 600;
+        }
+
+        .user-icon {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.2rem;
         }
 
         .menu-toggle {
@@ -202,8 +215,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             flex-shrink: 0;
+            font-weight: 600;
         }
 
         .contact-text h4 {
@@ -297,23 +311,31 @@
             box-shadow: 0 5px 20px rgba(10, 80, 51, 0.3);
         }
 
-        /* Map Section */
-        .map-section {
-            padding: 0 5% 5rem;
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
         }
 
-        .map-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            height: 450px;
-            background-color: #F5F5F5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Footer */
@@ -399,33 +421,6 @@
             opacity: 0.9;
         }
 
-        /* Success Message */
-        .success-message {
-            display: none;
-            background-color: #4CAF50;
-            color: white;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            animation: slideDown 0.3s ease;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* Responsive Design */
         @media (max-width: 1024px) {
             .contact-container {
@@ -495,10 +490,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .map-container {
-                height: 300px;
-            }
-
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -525,7 +516,7 @@
             .contact-icon {
                 width: 50px;
                 height: 50px;
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -545,16 +536,16 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#shop">Shop</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="Contact.html" class="active">Contact</a></li>
             </ul>
             <div class="nav-right">
                 <input type="text" class="search-bar" placeholder="Search products...">
                 <div class="cart-icon">
-                    🛒
+                    <a href="Cart.html"> 🛒</a>
                     <span class="cart-count">0</span>
                 </div>
-                <a href="#login">👤</a>
+                <a href="Login.html" class="user-icon">Login</a>
             </div>
         </nav>
     </header>
@@ -574,7 +565,7 @@
                 
                 <div class="contact-details">
                     <div class="contact-item">
-                        <div class="contact-icon">📍</div>
+                        <div class="contact-icon">LOC</div>
                         <div class="contact-text">
                             <h4>Visit Our Store</h4>
                             <p>123 Education Street, Downtown<br>Kigali, Rwanda<br>KG 123 St</p>
@@ -582,7 +573,7 @@
                     </div>
                     
                     <div class="contact-item">
-                        <div class="contact-icon">📧</div>
+                        <div class="contact-icon">@</div>
                         <div class="contact-text">
                             <h4>Email Us</h4>
                             <p>General Inquiries: info@classkart.com<br>Customer Support: support@classkart.com<br>Sales: sales@classkart.com</p>
@@ -590,7 +581,7 @@
                     </div>
                     
                     <div class="contact-item">
-                        <div class="contact-icon">📞</div>
+                        <div class="contact-icon">TEL</div>
                         <div class="contact-text">
                             <h4>Call Us</h4>
                             <p>Main Line: +250 788 123 456<br>WhatsApp: +250 788 123 457<br>Monday - Friday: 8:00 AM - 6:00 PM</p>
@@ -598,7 +589,7 @@
                     </div>
                     
                     <div class="contact-item">
-                        <div class="contact-icon">🕒</div>
+                        <div class="contact-icon">TIME</div>
                         <div class="contact-text">
                             <h4>Business Hours</h4>
                             <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 4:00 PM<br>Sunday: Closed</p>
@@ -610,7 +601,7 @@
             <div class="contact-form">
                 <h3>Send Us a Message</h3>
                 <div class="success-message" id="successMessage">
-                    ✓ Thank you! Your message has been sent successfully. We'll get back to you soon.
+                    Thank you! Your message has been sent successfully. We'll get back to you soon.
                 </div>
                 <form id="contactForm" onsubmit="return handleSubmit(event)">
                     <div class="form-row">
@@ -661,7 +652,6 @@
         </div>
     </section>
 
-
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -675,9 +665,8 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="index.html#shop">Shop</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="About.html">About Us</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
                 </ul>
             </div>
 
@@ -721,10 +710,6 @@
             const form = event.target;
             const formData = new FormData(form);
             
-            const firstName = formData.get('firstName');
-            const lastName = formData.get('lastName');
-            const email = formData.get('email');
-            
             // Show success message
             const successMessage = document.getElementById('successMessage');
             successMessage.classList.add('show');
@@ -749,6 +734,10 @@
                 document.getElementById('navLinks').classList.remove('active');
             });
         });
+
+        // Update cart count from localStorage if available
+        const cartCount = localStorage.getItem('cartCount') || 0;
+        document.querySelector('.cart-count').textContent = cartCount;
     </script>
 </body>
 </html>

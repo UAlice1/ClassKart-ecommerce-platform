@@ -7,11 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -33,9 +29,7 @@
             margin: 0 auto;
         }
 
-        .logo img {
-            height: 50px;
-        }
+        .logo img { height: 50px; }
 
         .nav-links {
             display: flex;
@@ -47,12 +41,9 @@
             text-decoration: none;
             color: #333;
             font-weight: 500;
-            transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #0A5033;
-        }
+        .nav-links a:hover { color: #0A5033; }
 
         .signup-container {
             min-height: calc(100vh - 250px);
@@ -71,63 +62,20 @@
             max-width: 500px;
         }
 
-        .signup-logo {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
+        .signup-logo img { height: 60px; }
 
-        .signup-logo img {
-            height: 60px;
-        }
+        .signup-header { text-align: center; margin-bottom: 2rem; }
+        .signup-header h1 { font-size: 1.8rem; color: #333; }
 
-        .signup-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .signup-header h1 {
-            font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .signup-header p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: .5rem; font-weight: 500; }
 
         .form-group input {
             width: 100%;
             padding: 0.9rem 1rem;
             border: 1px solid #E0E0E0;
             border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #0A5033;
-            box-shadow: 0 0 0 3px rgba(10, 80, 51, 0.1);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            font-size: .95rem;
         }
 
         .btn-signup {
@@ -140,55 +88,31 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Poppins', sans-serif;
         }
 
         .btn-signup:hover {
             background: #084028;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(10, 80, 51, 0.3);
         }
 
-        .signin-link {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
+        .signin-link { text-align: center; margin-top: 1.5rem; }
 
-        .signin-link a {
-            color: #0A5033;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
+        /* PHP message styles */
         .error-message {
             background: #fee;
             color: #c33;
-            padding: 0.8rem;
+            padding: .8rem;
             border-radius: 8px;
             margin-bottom: 1rem;
-            font-size: 0.9rem;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
+            font-size: .9rem;
         }
 
         .success-message {
             background: #efe;
             color: #3a3;
-            padding: 0.8rem;
+            padding: .8rem;
             border-radius: 8px;
             margin-bottom: 1rem;
-            font-size: 0.9rem;
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
+            font-size: .9rem;
         }
 
         footer {
@@ -196,21 +120,17 @@
             padding: 2rem 5%;
             margin-top: 3rem;
             text-align: center;
-            color: #666;
         }
 
         @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .signup-card {
-                padding: 2rem;
-            }
+            .form-row { grid-template-columns: 1fr; }
+            .signup-card { padding: 2rem; }
         }
     </style>
 </head>
+
 <body>
+
     <header>
         <nav>
             <div class="logo">
@@ -227,19 +147,29 @@
 
     <div class="signup-container">
         <div class="signup-card">
+
+            <!-- LOGO -->
             <div class="signup-logo">
                 <img src="images/logo.png" alt="ClassKart Logo">
             </div>
-            
+
+            <!-- HEADER -->
             <div class="signup-header">
                 <h1>Create Account</h1>
                 <p>Join ClassKart and start learning today</p>
             </div>
 
-            <div class="error-message" id="errorMessage"></div>
-            <div class="success-message" id="successMessage"></div>
+            <!-- PHP ERROR/SUCCESS MESSAGES -->
+            <?php if (isset($_GET['error'])): ?>
+                <div class="error-message"><?php echo htmlspecialchars($_GET['error']); ?></div>
+            <?php endif; ?>
 
-            <form id="signupForm" method="POST" action="signup_process.php">
+            <?php if (isset($_GET['success'])): ?>
+                <div class="success-message"><?php echo htmlspecialchars($_GET['success']); ?></div>
+            <?php endif; ?>
+
+            <!-- FORM -->
+            <form method="POST" action="signup_process.php">
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
                     <input type="text" id="fullName" name="fullName" required>
@@ -255,7 +185,7 @@
                     <input type="tel" id="phone" name="phone" required>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" required minlength="8">
@@ -280,53 +210,5 @@
         <p>© 2025 ClassKart. All rights reserved.</p>
     </footer>
 
-    <script>
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const fullName = document.getElementById('fullName').value;
-            const phone = document.getElementById('phone').value;
-            const errorMessage = document.getElementById('errorMessage');
-
-            // Validation
-            if (!fullName || !email || !phone || !password || !confirmPassword) {
-                e.preventDefault();
-                errorMessage.textContent = 'Please fill in all fields.';
-                errorMessage.classList.add('show');
-                return false;
-            }
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                e.preventDefault();
-                errorMessage.textContent = 'Please enter a valid email address.';
-                errorMessage.classList.add('show');
-                return false;
-            }
-
-            if (password.length < 8) {
-                e.preventDefault();
-                errorMessage.textContent = 'Password must be at least 8 characters long.';
-                errorMessage.classList.add('show');
-                return false;
-            }
-
-            if (password !== confirmPassword) {
-                e.preventDefault();
-                errorMessage.textContent = 'Passwords do not match.';
-                errorMessage.classList.add('show');
-                return false;
-            }
-
-            errorMessage.classList.remove('show');
-        });
-
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('input', function() {
-                document.getElementById('errorMessage').classList.remove('show');
-            });
-        });
-    </script>
 </body>
 </html>
