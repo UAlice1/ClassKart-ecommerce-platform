@@ -7,12 +7,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fullName = trim($_POST["fullName"]);
     $email = trim($_POST["email"]);
     $phone = trim($_POST["phone"]);
+    $role = "customer"; // all signups are customers; admin is fixed
     $password = $_POST["password"];
     $confirmPassword = $_POST["confirmPassword"];
 
     // VALIDATIONS
     if (empty($fullName) || empty($email) || empty($phone) || empty($password) || empty($confirmPassword)) {
         header("Location: signup.php?error=Please fill in all fields.");
+        exit();
+    }
+
+    // Validate role
+    if (!in_array($role, ["customer", "admin"])) {
+        header("Location: signup.php?error=Invalid role selected.");
         exit();
     }
 
@@ -46,8 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 
-    $stmt = $conn->prepare("INSERT INTO users (full_name, email, phone, password) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $fullName, $email, $phone, $hashedPassword);
+    $stmt = $conn->prepare("INSERT INTO users (full_name, email, phone, password, role) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $fullName, $email, $phone, $hashedPassword, $role);
 
     if ($stmt->execute()) {
         header("Location: signup.php?success=Account created successfully! Please login.");

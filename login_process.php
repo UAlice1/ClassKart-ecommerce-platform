@@ -2,57 +2,70 @@
 session_start();
 
 // DATABASE CONNECTION
-$host = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "classkart";
-
-$conn = new mysqli($host, $user, $pass, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once 'db_connection.php';
 
 // FORM DATA
-$email = trim($_POST['email']);
-$password = trim($_POST['password']);
+$email = trim($_POST['email'] ?? '');
+$password = trim($_POST['password'] ?? '');
 
 // VALIDATION
-if (empty($email) || empty($password)) {
-    header("Location: login.html?error=Please fill in all fields");
+if ($email === '' || $password === '') {
+    header("Location: Login.php?error=Please fill in all fields");
     exit;
 }
 
-// Check if email exists
-$stmt = $conn->prepare("SELECT id, full_name, password FROM users WHERE email = ?");
+// ENSURE SINGLE ADMIN USER EXISTS IN DATABASE
+$adminEmail = 'umubyeyialice7@123';
+$adminPlainPassword = 'Alice@123';
+$adminName = 'Alice';
+
+$adminCheck = $conn->prepare("SELECT id FROM users WHERE email = ?");
+$adminCheck->bind_param("s", $adminEmail);
+$adminCheck->execute();
+$adminCheck->store_result();
+
+if ($adminCheck->num_rows === 0) {
+    $adminCheck->close();
+    $hash = password_hash($adminPlainPassword, PASSWORD_DEFAULT);
+    $createAdmin = $conn->prepare("INSERT INTO users (full_name, email, phone, password, role) VALUES (?, ?, ?, ?, 'admin')");
+    $phone = '000000000';
+    $createAdmin->bind_param("ssss", $adminName, $adminEmail, $phone, $hash);
+    $createAdmin->execute();
+    $createAdmin->close();
+} else {
+    $adminCheck->close();
+}
+
+// NORMAL LOGIN (ADMIN OR CUSTOMER) FROM DATABASE
+$stmt = $conn->prepare("SELECT id, full_name, password, role FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $stmt->store_result();
 
-if ($stmt->num_rows == 1) {
-    $stmt->bind_result($id, $full_name, $hashedPassword);
+if ($stmt->num_rows === 1) {
+    $stmt->bind_result($id, $full_name, $hashedPassword, $role);
     $stmt->fetch();
 
-    // Verify password
     if (password_verify($password, $hashedPassword)) {
-
-        // Store session
         $_SESSION['user_id'] = $id;
         $_SESSION['full_name'] = $full_name;
+        $_SESSION['role'] = $role;
 
-        header("Location: index.html?login=success");
-        exit;
-
+        if ($role === 'admin') {
+            header("Location: admin_dashboard.php");
+            exit;
+        } else {
+            header("Location: index.html?login=success");
+            exit;
+        }
     } else {
-        header("Location: login.html?error=Incorrect password");
+        header("Location: Login.php?error=Incorrect password");
         exit;
     }
-
 } else {
-    header("Location: login.html?error=Email not found");
+    header("Location: Login.php?error=Email not found");
     exit;
 }
 
 $stmt->close();
-$conn->close();
 ?>

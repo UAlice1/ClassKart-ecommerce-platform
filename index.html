@@ -610,17 +610,17 @@
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#shop">Shop</a></li>
+                <li><a href="#shop">Product</a></li>
                 <li><a href="About.html">About</a></li>
                 <li><a href="Contact.html">Contact</a></li>
             </ul>
             <div class="nav-right">
                 <input type="text" class="search-bar" placeholder="Search products...">
-                <div class="cart-icon"><a href="/Cart.html">Login</a>
-                   
+                <a href="Cart.php" class="cart-icon">
+                    🛒
                     <span class="cart-count">0</span>
-                </div>
-                <a href="/Login.php">👤</a>
+                </a>
+                <a href="Login.php">Login</a>
             </div>
         </nav>
     </header>
@@ -938,25 +938,11 @@
             });
         });
 
-        // Add to cart functionality
-        let cartCount = 0;
-        const cartCountElement = document.querySelector('.cart-count');
-        const addToCartButtons = document.querySelectorAll('.btn-add-cart');
-
-        addToCartButtons.forEach(button => {
+        // Redirect "Add to Cart" buttons on home page to real shop page
+        document.querySelectorAll('.btn-add-cart').forEach(button => {
             button.addEventListener('click', (e) => {
-                e.stopPropagation();
-                cartCount++;
-                cartCountElement.textContent = cartCount;
-                
-                // Add animation
-                button.textContent = 'Added!';
-                button.style.backgroundColor = '#084028';
-                
-                setTimeout(() => {
-                    button.textContent = 'Add to Cart';
-                    button.style.backgroundColor = '#0A5033';
-                }, 1500);
+                e.preventDefault();
+                window.location.href = 'shop.php';
             });
         });
 

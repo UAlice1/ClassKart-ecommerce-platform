@@ -1,3 +1,52 @@
+<?php
+session_start();
+require_once 'db_connection.php';
+
+if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+// Handle updates from quantity buttons
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['update']) && isset($_POST['qty']) && is_array($_POST['qty'])) {
+        foreach ($_POST['qty'] as $productId => $qty) {
+            $productId = (int)$productId;
+            $qty = max(1, (int)$qty);
+            if ($productId > 0) {
+                $_SESSION['cart'][$productId] = $qty;
+            }
+        }
+    }
+    if (isset($_POST['remove'])) {
+        $removeId = (int)$_POST['remove'];
+        unset($_SESSION['cart'][$removeId]);
+    }
+}
+
+$cart = $_SESSION['cart'];
+$productIds = array_keys($cart);
+$items = [];
+
+if (!empty($productIds)) {
+    $placeholders = implode(',', array_fill(0, count($productIds), '?'));
+    $types = str_repeat('i', count($productIds));
+    $stmt = $conn->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
+    $stmt->bind_param($types, ...$productIds);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $items[] = $row;
+    }
+    $stmt->close();
+}
+
+function cartCount(array $cart): int {
+    return array_sum($cart);
+}
+
+$totalItems = cartCount($cart);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -530,11 +579,13 @@
             </ul>
             <div class="nav-right">
                 <input type="text" class="search-bar" placeholder="Search products...">
-                <div class="cart-icon">
+                <a href="Cart.php" class="cart-icon">
                     🛒
-                    <span class="cart-count" id="cartCount">3</span>
-                </div>
-                <a href="/Login.html">Login</a>
+                    <span class="cart-count" id="cartCount"><?php echo (int)$totalItems; ?></span>
+                </a>
+                <a href="<?php echo isset($_SESSION['user_id']) ? 'logout.php' : 'Login.php'; ?>">
+                    <?php echo isset($_SESSION['user_id']) ? 'Logout' : 'Login'; ?>
+                </a>
             </div>
         </nav>
     </header>
@@ -543,81 +594,61 @@
     <section class="cart-hero">
         <div class="cart-hero-content">
             <h1>Shopping Cart</h1>
-            <p><span id="itemCount">3</span> items in your cart</p>
+            <p><span id="itemCount"><?php echo (int)$totalItems; ?></span> items in your cart</p>
         </div>
     </section>
 
     <!-- Cart Container -->
     <div class="cart-container">
         <!-- Cart Items -->
-        <div class="cart-items" id="cartItems">
-            <!-- Item 1 -->
-            <div class="cart-item" data-id="1" data-price="49.99">
+        <form method="POST" class="cart-items" id="cartItems">
+            <?php
+            $subtotal = 0;
+            if (!empty($items)):
+                foreach ($items as $item):
+                    $id = (int)$item['id'];
+                    $qty = (int)($cart[$id] ?? 1);
+                    $price = (float)$item['price'];
+                    $lineTotal = $price * $qty;
+                    $subtotal += $lineTotal;
+            ?>
+            <div class="cart-item" data-id="<?php echo $id; ?>" data-price="<?php echo htmlspecialchars($price); ?>">
                 <div class="item-image">
-                    <img src="images/mathe.jpg" alt="Complete Mathematics Textbook Set">
+                    <?php if (!empty($item['image_path'])): ?>
+                        <img src="<?php echo htmlspecialchars($item['image_path']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
+                    <?php else: ?>
+                        <img src="images/unknownbook.jpg" alt="<?php echo htmlspecialchars($item['name']); ?>">
+                    <?php endif; ?>
                 </div>
                 <div class="item-details">
-                    <h3>Complete Mathematics Textbook Set</h3>
-                    <div class="item-price">$49.99</div>
+                    <h3><?php echo htmlspecialchars($item['name']); ?></h3>
+                    <div class="item-price"><?php echo number_format($price, 0); ?> Frw</div>
                     <div class="quantity-controls">
-                        <button class="qty-btn" onclick="decreaseQty(1)">-</button>
-                        <input type="number" class="qty-input" value="2" id="qty-1" readonly>
-                        <button class="qty-btn" onclick="increaseQty(1)">+</button>
+                        <button type="button" class="qty-btn" onclick="changeQty(<?php echo $id; ?>,-1)">-</button>
+                        <input type="number" class="qty-input" value="<?php echo $qty; ?>" id="qty-<?php echo $id; ?>" name="qty[<?php echo $id; ?>]" readonly>
+                        <button type="button" class="qty-btn" onclick="changeQty(<?php echo $id; ?>,1)">+</button>
                     </div>
                 </div>
                 <div class="item-total">
-                    <div class="item-total-price" id="total-1">$99.98</div>
-                    <button class="remove-btn" onclick="removeItem(1)">🗑️</button>
+                    <div class="item-total-price" id="total-<?php echo $id; ?>"><?php echo number_format($lineTotal, 0); ?> Frw</div>
+                    <button class="remove-btn" name="remove" value="<?php echo $id; ?>">🗑️</button>
                 </div>
             </div>
-
-            <!-- Item 2 -->
-            <div class="cart-item" data-id="2" data-price="24.99">
-                <div class="item-image">
-                    <img src="images/pencil.jpg" alt="Premium Stationery Collection">
-                </div>
-                <div class="item-details">
-                    <h3>Premium Stationery Collection</h3>
-                    <div class="item-price">$24.99</div>
-                    <div class="quantity-controls">
-                        <button class="qty-btn" onclick="decreaseQty(2)">-</button>
-                        <input type="number" class="qty-input" value="1" id="qty-2" readonly>
-                        <button class="qty-btn" onclick="increaseQty(2)">+</button>
-                    </div>
-                </div>
-                <div class="item-total">
-                    <div class="item-total-price" id="total-2">$24.99</div>
-                    <button class="remove-btn" onclick="removeItem(2)">🗑️</button>
-                </div>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="cart-item" data-id="3" data-price="79.99">
-                <div class="item-image">
-                    <img src="images/laptop.jpg" alt="Digital Learning Course Bundle">
-                </div>
-                <div class="item-details">
-                    <h3>Digital Learning Course Bundle</h3>
-                    <div class="item-price">$79.99</div>
-                    <div class="quantity-controls">
-                        <button class="qty-btn" onclick="decreaseQty(3)">-</button>
-                        <input type="number" class="qty-input" value="1" id="qty-3" readonly>
-                        <button class="qty-btn" onclick="increaseQty(3)">+</button>
-                    </div>
-                </div>
-                <div class="item-total">
-                    <div class="item-total-price" id="total-3">$79.99</div>
-                    <button class="remove-btn" onclick="removeItem(3)">🗑️</button>
-                </div>
-            </div>
-        </div>
+            <?php
+                endforeach;
+            else:
+            ?>
+                <p>Your cart is empty. <a href="shop.php">Start shopping</a>.</p>
+            <?php endif; ?>
+            <input type="hidden" name="update" value="1">
+        </form>
 
         <!-- Order Summary -->
         <div class="order-summary">
             <h2>Order Summary</h2>
             <div class="summary-row">
                 <span class="label">Subtotal</span>
-                <span class="value" id="subtotal">$204.96</span>
+                <span class="value" id="subtotal"><?php echo number_format($subtotal ?? 0, 0); ?> Frw</span>
             </div>
             <div class="summary-row">
                 <span class="label">Shipping</span>
@@ -626,10 +657,10 @@
             <div class="summary-divider"></div>
             <div class="summary-total">
                 <span class="total-label">Total</span>
-                <span class="total-value" id="total">$204.96</span>
+                <span class="total-value" id="total"><?php echo number_format($subtotal ?? 0, 0); ?> Frw</span>
             </div>
-            <button class="btn-checkout" onclick="window.location.href='Checkout.html'">Proceed to Checkout →</button>
-            <button class="btn-continue" onclick="window.location.href='index.html#shop'">Continue Shopping</button>
+            <button class="btn-checkout" <?php echo $totalItems === 0 ? 'disabled style="opacity:0.6;cursor:not-allowed;"' : ''; ?> onclick="window.location.href='Checkout.php'">Proceed to Checkout →</button>
+            <button class="btn-continue" onclick="window.location.href='shop.php'">Continue Shopping</button>
         </div>
     </div>
 
@@ -683,61 +714,13 @@
     </footer>
 
     <script>
-        // Calculate totals
-        function calculateTotals() {
-            let subtotal = 0;
-            const items = document.querySelectorAll('.cart-item');
-            
-            items.forEach(item => {
-                const id = item.getAttribute('data-id');
-                const price = parseFloat(item.getAttribute('data-price'));
-                const qty = parseInt(document.getElementById(`qty-${id}`).value);
-                const itemTotal = price * qty;
-                
-                document.getElementById(`total-${id}`).textContent = `$${itemTotal.toFixed(2)}`;
-                subtotal += itemTotal;
-            });
-            
-            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('total').textContent = `$${subtotal.toFixed(2)}`;
-            
-            // Update item count
-            const totalItems = Array.from(items).reduce((sum, item) => {
-                const id = item.getAttribute('data-id');
-                return sum + parseInt(document.getElementById(`qty-${id}`).value);
-            }, 0);
-            
-            document.getElementById('itemCount').textContent = totalItems;
-            document.getElementById('cartCount').textContent = totalItems;
+        function changeQty(id, delta) {
+            const input = document.getElementById('qty-' + id);
+            let value = parseInt(input.value) + delta;
+            if (value < 1) value = 1;
+            input.value = value;
+            document.getElementById('cartItems').submit();
         }
-
-        // Increase quantity
-        function increaseQty(id) {
-            const input = document.getElementById(`qty-${id}`);
-            input.value = parseInt(input.value) + 1;
-            calculateTotals();
-        }
-
-        // Decrease quantity
-        function decreaseQty(id) {
-            const input = document.getElementById(`qty-${id}`);
-            if (parseInt(input.value) > 1) {
-                input.value = parseInt(input.value) - 1;
-                calculateTotals();
-            }
-        }
-
-        // Remove item
-        function removeItem(id) {
-            const item = document.querySelector(`[data-id="${id}"]`);
-            if (confirm('Remove this item from cart?')) {
-                item.remove();
-                calculateTotals();
-            }
-        }
-
-        // Initialize
-        calculateTotals();
     </script>
 </body>
 </html>
