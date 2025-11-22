@@ -215,11 +215,56 @@ $cartEmpty = empty($items);
             border-color: #0A5033;
         }
 
-        .payment-header {
+        .phone-input-group {
+            position: relative;
+        }
+
+        .phone-prefix {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-weight: 500;
+            pointer-events: none;
+            margin-top: 0.75rem;
+        }
+
+        .phone-input-group input {
+            padding-left: 4rem !important;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-method {
+            padding: 1.5rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .payment-method.selected {
+            border-color: #0A5033;
+            background: #f0f7f4;
+        }
+
+        .payment-method-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .payment-method-info p {
+            font-size: 0.85rem;
+            color: #666;
         }
 
         .security-note {
@@ -230,13 +275,8 @@ $cartEmpty = empty($items);
             font-size: 0.85rem;
             margin-top: 1rem;
             padding: 0.75rem;
-            background: #F8F8F8;
+            background: #E8F5E9;
             border-radius: 8px;
-        }
-
-        .security-note::before {
-            content: "🔒";
-            font-size: 1rem;
         }
 
         .order-summary {
@@ -347,19 +387,86 @@ $cartEmpty = empty($items);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
         }
 
-        .btn-place-order:hover {
+        .btn-place-order:hover:not(:disabled) {
             background: #084028;
             transform: translateY(-2px);
         }
 
-        .btn-place-order::before {
-            content: "🔒";
+        .btn-place-order:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .empty-state {
+            padding: 1rem;
+            background: #FFF8E1;
+            color: #8a6d3b;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #F5E2A3;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0A5033;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #0A5033;
+            margin-bottom: 1rem;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            color: #d32f2f;
+            margin-bottom: 1rem;
         }
 
         footer {
@@ -409,45 +516,11 @@ $cartEmpty = empty($items);
             padding-left: 5px;
         }
 
-        .newsletter-form {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .newsletter-form button {
-            padding: 0.8rem 1.5rem;
-            background-color: #FFFFFF;
-            color: #0A5033;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             opacity: 0.9;
-        }
-
-        .empty-state {
-            padding: 1rem;
-            background: #FFF8E1;
-            color: #8a6d3b;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            border: 1px solid #F5E2A3;
         }
 
         @media (max-width: 1024px) {
@@ -467,6 +540,10 @@ $cartEmpty = empty($items);
 
             .search-bar {
                 width: 150px;
+            }
+
+            .checkout-hero h1 {
+                font-size: 2rem;
             }
         }
 
@@ -509,7 +586,7 @@ $cartEmpty = empty($items);
     <section class="checkout-hero">
         <div class="checkout-hero-content">
             <h1>Checkout</h1>
-            <p>Complete your order</p>
+            <p>Complete your order with Mobile Money</p>
         </div>
     </section>
 
@@ -520,21 +597,23 @@ $cartEmpty = empty($items);
                     Your cart is empty. Please add products before proceeding to checkout.
                 </div>
             <?php endif; ?>
-            <form id="checkoutForm" method="POST" action="process_order.php">
+            
+            <form id="checkoutForm">
                 <div class="form-section">
                     <h2>Contact Information</h2>
                     <div class="form-group">
-                        <label for="fullName">Full Name</label>
+                        <label for="fullName">Full Name *</label>
                         <input type="text" id="fullName" name="fullName" required <?php echo $cartEmpty ? 'disabled' : ''; ?>>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">Email *</label>
                             <input type="email" id="email" name="email" required <?php echo $cartEmpty ? 'disabled' : ''; ?>>
                         </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" required <?php echo $cartEmpty ? 'disabled' : ''; ?>>
+                        <div class="form-group phone-input-group">
+                            <label for="phone">Mobile Money Number *</label>
+                            <span class="phone-prefix">+250</span>
+                            <input type="tel" id="phone" name="phone" placeholder="7XXXXXXXX" maxlength="9" required <?php echo $cartEmpty ? 'disabled' : ''; ?>>
                         </div>
                     </div>
                 </div>
@@ -542,50 +621,40 @@ $cartEmpty = empty($items);
                 <div class="form-section">
                     <h2>Shipping Address</h2>
                     <div class="form-group">
-                        <label for="street">Street Address</label>
+                        <label for="street">Street Address *</label>
                         <input type="text" id="street" name="street" required <?php echo $cartEmpty ? 'disabled' : ''; ?>>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="city">City</label>
+                            <label for="city">City *</label>
                             <input type="text" id="city" name="city" required <?php echo $cartEmpty ? 'disabled' : ''; ?>>
                         </div>
                         <div class="form-group">
-                            <label for="state">State</label>
-                            <input type="text" id="state" name="state" required <?php echo $cartEmpty ? 'disabled' : ''; ?>>
+                            <label for="state">District *</label>
+                            <input type="text" id="state" name="state" placeholder="e.g., Gasabo" required <?php echo $cartEmpty ? 'disabled' : ''; ?>>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="zipCode">ZIP Code</label>
-                        <input type="text" id="zipCode" name="zipCode" required style="max-width: 200px;" <?php echo $cartEmpty ? 'disabled' : ''; ?>>
                     </div>
                 </div>
 
                 <div class="form-section">
-                    <div class="payment-header">
-                        <h2>Payment Details (Simulation)</h2>
-                    </div>
-                    <div class="form-group">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" <?php echo $cartEmpty ? 'disabled' : ''; ?>>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="expiryDate">Expiry Date</label>
-                            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5" <?php echo $cartEmpty ? 'disabled' : ''; ?>>
-                        </div>
-                        <div class="form-group">
-                            <label for="cvv">CVV</label>
-                            <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" <?php echo $cartEmpty ? 'disabled' : ''; ?>>
+                    <h2>Payment Method</h2>
+                    <div class="payment-methods">
+                        <div class="payment-method selected">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                <circle cx="30" cy="30" r="28" fill="#FFCC00"/>
+                                <path d="M20 25L30 35L40 25" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                            <div class="payment-method-info">
+                                <h4>MTN Mobile Money</h4>
+                                <p>Pay with your MTN MoMo </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="security-note">
-                        Payments are simulated for this demo. No real charges will be made.
-                    </div>
+                   
                 </div>
 
-                <button type="submit" class="btn-place-order" <?php echo $cartEmpty ? 'disabled style="opacity:0.6;cursor:not-allowed;"' : ''; ?>>
-                    Place Order
+                <button type="submit" class="btn-place-order" <?php echo $cartEmpty ? 'disabled' : ''; ?>>
+                    Pay <?php echo number_format($subtotal, 0); ?> Frw with Mobile Money
                 </button>
             </form>
         </div>
@@ -617,7 +686,7 @@ $cartEmpty = empty($items);
                 </div>
                 <div class="summary-row">
                     <span>Shipping</span>
-                    <span>Free</span>
+                    <span style="color: #0A5033; font-weight: 600;">Free</span>
                 </div>
                 <div class="summary-divider"></div>
                 <div class="summary-total">
@@ -625,8 +694,15 @@ $cartEmpty = empty($items);
                     <span class="total-value"><?php echo number_format($subtotal, 0); ?> Frw</span>
                 </div>
             <?php else: ?>
-                <p>Your bag is empty.</p>
+                <p>Your cart is empty.</p>
             <?php endif; ?>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div id="modalContent"></div>
         </div>
     </div>
 
@@ -634,42 +710,17 @@ $cartEmpty = empty($items);
         <div class="footer-content">
             <div class="footer-section">
                 <h3>ClassKart</h3>
-                <p>Your One-Stop Shop for Learning. Quality educational materials for students, teachers, and parents.</p>
-                <div class="social-icons">
-                    <a href="#" class="social-icon">f</a>
-                    <a href="#" class="social-icon">𝕏</a>
-                    <a href="#" class="social-icon">📷</a>
-                </div>
+                <p>Empowering Learning Through Access. Quality educational materials for students, teachers, and parents.</p>
             </div>
 
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html">Shop</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.php">Shop</a></li>
                     <li><a href="About.html">About Us</a></li>
                     <li><a href="Contact.html">Contact</a></li>
-                    <li><a href="#faq">FAQ</a></li>
                 </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Customer Service</h3>
-                <ul class="footer-links">
-                    <li><a href="#shipping">Shipping Info</a></li>
-                    <li><a href="#returns">Returns & Refunds</a></li>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Terms & Conditions</a></li>
-                    <li><a href="#support">Support Center</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Newsletter</h3>
-                <p>Subscribe to get updates on new products and exclusive offers.</p>
-                <form class="newsletter-form" onsubmit="return false;">
-                    <input type="email" placeholder="Your email" required>
-                    <button type="submit">Subscribe</button>
-                </form>
             </div>
         </div>
 
@@ -679,25 +730,118 @@ $cartEmpty = empty($items);
     </footer>
 
     <script>
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s/g, '');
-            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
-            e.target.value = formattedValue;
-        });
+        const cartTotal = <?php echo $subtotal; ?>;
 
-        document.getElementById('expiryDate').addEventListener('input', function(e) {
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            if (value.startsWith('0')) {
+                value = value.substring(1);
             }
-            e.target.value = value;
+            if (value.startsWith('250')) {
+                value = value.substring(3);
+            }
+            e.target.value = value.substring(0, 9);
         });
 
-        document.getElementById('cvv').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
+        // Form submission
+        document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const phone = '250' + formData.get('phone').replace(/\D/g, '');
+            
+            // Validate phone number
+            if (phone.length !== 12) {
+                alert('Please enter a valid 9-digit phone number');
+                return;
+            }
+
+            // Show loading modal
+            showModal('loading');
+
+            try {
+                const response = await fetch('process_momo_payment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fullName: formData.get('fullName'),
+                        email: formData.get('email'),
+                        phone: phone,
+                        amount: cartTotal,
+                        street: formData.get('street'),
+                        city: formData.get('city'),
+                        state: formData.get('state')
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showModal('success', result);
+                    
+                    // Redirect after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = 'order_confirmation.php?order=' + result.orderId;
+                    }, 3000);
+                } else {
+                    showModal('error', result);
+                }
+            } catch (error) {
+                showModal('error', { message: 'Connection error. Please try again.' });
+            }
         });
+
+        function showModal(type, data = {}) {
+            const modal = document.getElementById('paymentModal');
+            const content = document.getElementById('modalContent');
+            
+            if (type === 'loading') {
+                content.innerHTML = `
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+                    <h2>Processing Payment</h2>
+                    <div class="spinner"></div>
+                    <p>Please check your phone to approve the payment...</p>
+                `;
+            } else if (type === 'success') {
+                content.innerHTML = `
+                    <div class="success-icon">✓</div>
+                    <h2>Payment Request Sent!</h2>
+                    <p>Please check your phone and enter your PIN to complete the payment.</p>
+                    <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                        Order ID: ${data.orderId || 'N/A'}
+                    </p>
+                    <p style="margin-top: 0.5rem; color: #0A5033; font-weight: 600;">
+                        Redirecting to confirmation page...
+                    </p>
+                `;
+            } else if (type === 'error') {
+                content.innerHTML = `
+                    <div class="error-icon">✕</div>
+                    <h2>Payment Failed</h2>
+                    <p>${data.message || 'An error occurred. Please try again.'}</p>
+                    <button onclick="closeModal()" style="margin-top: 1.5rem; padding: 0.8rem 2rem; background: #0A5033; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                        Try Again
+                    </button>
+                `;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
     </script>
 </body>
 </html>
-
-

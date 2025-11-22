@@ -200,7 +200,7 @@
                 <button type="submit" class="btn-signup">Sign Up</button>
 
                 <div class="signin-link">
-                    Already have an account? <a href="login.html">Sign in</a>
+                    Already have an account? <a href="login.php">Sign in</a>
                 </div>
             </form>
         </div>

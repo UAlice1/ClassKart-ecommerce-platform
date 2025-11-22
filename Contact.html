@@ -565,7 +565,6 @@
                 
                 <div class="contact-details">
                     <div class="contact-item">
-                        <div class="contact-icon">LOC</div>
                         <div class="contact-text">
                             <h4>Visit Our Store</h4>
                             <p>123 Education Street, Downtown<br>Kigali, Rwanda<br>KG 123 St</p>
@@ -573,7 +572,7 @@
                     </div>
                     
                     <div class="contact-item">
-                        <div class="contact-icon">@</div>
+                        
                         <div class="contact-text">
                             <h4>Email Us</h4>
                             <p>General Inquiries: info@classkart.com<br>Customer Support: support@classkart.com<br>Sales: sales@classkart.com</p>
@@ -584,12 +583,12 @@
                         <div class="contact-icon">TEL</div>
                         <div class="contact-text">
                             <h4>Call Us</h4>
-                            <p>Main Line: +250 788 123 456<br>WhatsApp: +250 788 123 457<br>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                            <p>Main Line: +250 788 123 456<br>WhatsApp: +250 790038006<br>Monday - Friday: 8:00 AM - 6:00 PM</p>
                         </div>
                     </div>
                     
                     <div class="contact-item">
-                        <div class="contact-icon">TIME</div>
+                    
                         <div class="contact-text">
                             <h4>Business Hours</h4>
                             <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 4:00 PM<br>Sunday: Closed</p>
@@ -607,24 +606,24 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
-                            <input type="text" id="firstName" name="firstName" required placeholder="John">
+                            <input type="text" id="firstName" name="firstName" required placeholder="your first name">
                         </div>
                         
                         <div class="form-group">
                             <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName" required placeholder="Doe">
+                            <input type="text" id="lastName" name="lastName" required placeholder="your last ">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+                            <input type="email" id="email" name="email" required placeholder="your email ">
                         </div>
                         
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+250 788 123 456">
+                            <input type="tel" id="phone" name="phone" placeholder="+250 78*******">
                         </div>
                     </div>
                     
@@ -676,809 +675,63 @@
                     <li><a href="#shipping">Shipping Info</a></li>
                     <li><a href="#returns">Returns & Refunds</a></li>
                     <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Terms & Conditions</a></li>
-                    <li><a href="#support">Support Center</a></li>
-                </ul>
+                 
             </div>
-
-            <div class="footer-section">
-                <h3>Newsletter</h3>
-                <p>Subscribe to get updates on new products and exclusive offers.</p>
-                <form class="newsletter-form" onsubmit="return false;">
-                    <input type="email" placeholder="Your email address" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>© 2025 ClassKart. All rights reserved. | Alice & Fidele</p>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Contact form submission
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const form = event.target;
-            const formData = new FormData(form);
-            
-            // Show success message
-            const successMessage = document.getElementById('successMessage');
-            successMessage.classList.add('show');
-            
-            // Scroll to success message
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-            // Reset form
-            form.reset();
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 5000);
-            
-            return false;
-        }
-
-        // Close mobile menu when clicking on links
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-            });
-        });
-
-        // Update cart count from localStorage if available
-        const cartCount = localStorage.getItem('cartCount') || 0;
-        document.querySelector('.cart-count').textContent = cartCount;
-    </script>
-</body>
-</html>
-        .footer-links li {
-
-            margin-bottom: 0.8rem;
-
-        }
-
-
-
-        .footer-links a {
-
-            color: rgba(255, 255, 255, 0.9);
-
-            text-decoration: none;
-
-            transition: color 0.3s;
-
-        }
-
-
-
-        .footer-links a:hover {
-
-            color: #FFFFFF;
-
-            padding-left: 5px;
-
-        }
-
-
-
-        .newsletter-form {
-
-            display: flex;
-
-            gap: 0.5rem;
-
-            margin-top: 1rem;
-
-        }
-
-
-
-        .newsletter-form input {
-
-            flex: 1;
-
-            padding: 0.8rem 1rem;
-
-            border: none;
-
-            border-radius: 8px;
-
-            outline: none;
-
-        }
-
-
-
-        .newsletter-form button {
-
-            padding: 0.8rem 1.5rem;
-
-            background-color: #FFFFFF;
-
-            color: #0A5033;
-
-            border: none;
-
-            border-radius: 8px;
-
-            font-weight: 600;
-
-            cursor: pointer;
-
-            transition: all 0.3s;
-
-        }
-
-
-
-        .newsletter-form button:hover {
-
-            background-color: #F5F5F5;
-
-        }
-
-
-
-        .footer-bottom {
-
-            text-align: center;
-
-            padding-top: 2rem;
-
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-
-            opacity: 0.9;
-
-        }
-
-
-
-        /* Responsive Design */
-
-        @media (max-width: 1024px) {
-
-            .contact-container {
-
-                grid-template-columns: 1fr;
-
-                gap: 3rem;
-
-            }
-
-
-
-            .contact-hero h1 {
-
-                font-size: 2.5rem;
-
-            }
-
-        }
-
-
-
-        @media (max-width: 768px) {
-
-            .menu-toggle {
-
-                display: flex;
-
-            }
-
-
-
-            .nav-links {
-
-                position: absolute;
-
-                top: 100%;
-
-                left: 0;
-
-                right: 0;
-
-                background-color: #FFFFFF;
-
-                flex-direction: column;
-
-                gap: 0;
-
-                padding: 1rem 0;
-
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-
-                display: none;
-
-            }
-
-
-
-            .nav-links.active {
-
-                display: flex;
-
-            }
-
-
-
-            .nav-links li {
-
-                width: 100%;
-
-                text-align: center;
-
-                padding: 1rem;
-
-            }
-
-
-
-            .search-bar {
-
-                width: 120px;
-
-                font-size: 0.9rem;
-
-            }
-
-
-
-            .contact-hero {
-
-                padding: 4rem 5% 2rem;
-
-            }
-
-
-
-            .contact-hero h1 {
-
-                font-size: 2rem;
-
-            }
-
-
-
-            .contact-hero p {
-
-                font-size: 1rem;
-
-            }
-
-
-
-            .contact-info h2 {
-
-                font-size: 2rem;
-
-            }
-
-
-
-            .contact-form {
-
-                padding: 2rem 1.5rem;
-
-            }
-
-
-
-            .form-row {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-
-            .footer-content {
-
-                grid-template-columns: 1fr;
-
-                gap: 2rem;
-
-            }
-
-
-
-            .newsletter-form {
-
-                flex-direction: column;
-
-            }
-
-        }
-
-
-
-        @media (max-width: 480px) {
-
-            .logo img {
-
-                height: 40px;
-
-            }
-
-
-
-            .search-bar {
-
-                display: none;
-
-            }
-
-
-
-            .contact-hero h1 {
-
-                font-size: 1.8rem;
-
-            }
-
-
-
-            .contact-icon {
-
-                width: 50px;
-
-                height: 50px;
-
-                font-size: 1.2rem;
-
-            }
-
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-   
-
-    <header>
-
-        <nav>
-
-            <div class="logo">
-
-                <img src="images/logo.png" alt="ClassKart Logo">
-
-            </div>
-
-            <div class="menu-toggle" onclick="toggleMenu()">
-
-                <span></span>
-
-                <span></span>
-
-                <span></span>
-
-            </div>
-
-            <ul class="nav-links" id="navLinks">
-
-                <li><a href="index.html">Home</a></li>
-
-                <li><a href="index.html#shop">Shop</a></li>
-
-                <li><a href="About.html">About</a></li>
-
-                <li><a href="Contact.html" class="active">Contact</a></li>
-
-            </ul>
-
-            <div class="nav-right">
-
-                <input type="text" class="search-bar" placeholder="Search products...">
-
-                <div class="cart-icon">
-
-                    <a href="Cart.html"> 🛒</a>
-
-                    <span class="cart-count">0</span>
-
-                </div>
-
-                <a href="Login.html" class="user-icon">Login</a>
-
-            </div>
-
-        </nav>
-
-    </header>
-
-
-
-    <!-- Contact Hero -->
-
-    <section class="contact-hero">
-
-        <h1>Get In Touch With Us</h1>
-
-        <p>Have questions about our products or services? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
-
-    </section>
-
-
-
-    <!-- Contact Section -->
-
-    <section class="contact-section">
-
-        <div class="contact-container">
-
-            <div class="contact-info">
-
-                <h2>Contact Information</h2>
-
-                <p>Feel free to reach out to us through any of the following channels. Our team is here to help you with any questions or concerns.</p>
 
                 
-
-                <div class="contact-details">
-
-                    <div class="contact-item">
-
-                        <div class="contact-icon">LOC</div>
-
-                        <div class="contact-text">
-
-                            <h4>Visit Our Store</h4>
-
-                            <p>123 Education Street, Downtown<br>Kigali, Rwanda<br>KG 123 St</p>
-
-                        </div>
-
-                    </div>
-
-                    
-
-                    <div class="contact-item">
-
-                        <div class="contact-icon">@</div>
-
-                        <div class="contact-text">
-
-                            <h4>Email Us</h4>
-
-                            <p>General Inquiries: info@classkart.com<br>Customer Support: support@classkart.com<br>Sales: sales@classkart.com</p>
-
-                        </div>
-
-                    </div>
-
-                    
-
-                    <div class="contact-item">
-
-                        <div class="contact-icon">TEL</div>
-
-                        <div class="contact-text">
-
-                            <h4>Call Us</h4>
-
-                            <p>Main Line: +250 788 123 456<br>WhatsApp: +250 788 123 457<br>Monday - Friday: 8:00 AM - 6:00 PM</p>
-
-                        </div>
-
-                    </div>
-
-                    
-
-                    <div class="contact-item">
-
-                        <div class="contact-icon">TIME</div>
-
-                        <div class="contact-text">
-
-                            <h4>Business Hours</h4>
-
-                            <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 4:00 PM<br>Sunday: Closed</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
             </div>
-
-            
-
-            <div class="contact-form">
-
-                <h3>Send Us a Message</h3>
-
-                <div class="success-message" id="successMessage">
-
-                    Thank you! Your message has been sent successfully. We'll get back to you soon.
-
-                </div>
-
-                <form id="contactForm" onsubmit="return handleSubmit(event)">
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-
-                            <label for="firstName">First Name *</label>
-
-                            <input type="text" id="firstName" name="firstName" required placeholder="John">
-
-                        </div>
-
-                        
-
-                        <div class="form-group">
-
-                            <label for="lastName">Last Name *</label>
-
-                            <input type="text" id="lastName" name="lastName" required placeholder="Doe">
-
-                        </div>
-
-                    </div>
-
-                    
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-
-                            <label for="email">Email Address *</label>
-
-                            <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
-
-                        </div>
-
-                        
-
-                        <div class="form-group">
-
-                            <label for="phone">Phone Number</label>
-
-                            <input type="tel" id="phone" name="phone" placeholder="+250 788 123 456">
-
-                        </div>
-
-                    </div>
-
-                    
-
-                    <div class="form-group">
-
-                        <label for="subject">Subject *</label>
-
-                        <select id="subject" name="subject" required>
-
-                            <option value="">Select a subject...</option>
-
-                            <option value="general">General Inquiry</option>
-
-                            <option value="product">Product Information</option>
-
-                            <option value="order">Order Support</option>
-
-                            <option value="technical">Technical Support</option>
-
-                            <option value="feedback">Feedback</option>
-
-                            <option value="other">Other</option>
-
-                        </select>
-
-                    </div>
-
-                    
-
-                    <div class="form-group">
-
-                        <label for="message">Your Message *</label>
-
-                        <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
-
-                    </div>
-
-                    
-
-                    <button type="submit" class="btn-submit">Send Message</button>
-
-                </form>
-
-            </div>
-
         </div>
-
-    </section>
-
-
-
-    <!-- Footer -->
-
-    <footer>
-
-        <div class="footer-content">
-
-            <div class="footer-section">
-
-                <h3>ClassKart</h3>
-
-                <p>Empowering Learning Through Access. Quality educational materials for students, teachers, and parents.</p>
-
-            </div>
-
-
-
-            <div class="footer-section">
-
-                <h3>Quick Links</h3>
-
-                <ul class="footer-links">
-
-                    <li><a href="index.html">Home</a></li>
-
-                    <li><a href="index.html#shop">Shop</a></li>
-
-                    <li><a href="About.html">About Us</a></li>
-
-                    <li><a href="Contact.html">Contact</a></li>
-
-                </ul>
-
-            </div>
-
-
-
-            <div class="footer-section">
-
-                <h3>Customer Service</h3>
-
-                <ul class="footer-links">
-
-                    <li><a href="#shipping">Shipping Info</a></li>
-
-                    <li><a href="#returns">Returns & Refunds</a></li>
-
-                    <li><a href="#privacy">Privacy Policy</a></li>
-
-                    <li><a href="#terms">Terms & Conditions</a></li>
-
-                    <li><a href="#support">Support Center</a></li>
-
-                </ul>
-
-            </div>
-
-
-
-            <div class="footer-section">
-
-                <h3>Newsletter</h3>
-
-                <p>Subscribe to get updates on new products and exclusive offers.</p>
-
-                <form class="newsletter-form" onsubmit="return false;">
-
-                    <input type="email" placeholder="Your email address" required>
-
-                    <button type="submit">Subscribe</button>
-
-                </form>
-
-            </div>
-
-        </div>
-
-
 
         <div class="footer-bottom">
-
             <p>© 2025 ClassKart. All rights reserved. | Alice & Fidele</p>
-
         </div>
-
     </footer>
 
-
-
     <script>
-
         // Mobile menu toggle
-
         function toggleMenu() {
-
             const navLinks = document.getElementById('navLinks');
-
             navLinks.classList.toggle('active');
-
         }
-
-
 
         // Contact form submission
-
         function handleSubmit(event) {
-
             event.preventDefault();
-
             
-
             const form = event.target;
-
             const formData = new FormData(form);
-
             
-
             // Show success message
-
             const successMessage = document.getElementById('successMessage');
-
             successMessage.classList.add('show');
-
             
-
             // Scroll to success message
-
             successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
             
-
             // Reset form
-
             form.reset();
-
             
-
             // Hide success message after 5 seconds
-
             setTimeout(() => {
-
                 successMessage.classList.remove('show');
-
             }, 5000);
-
             
-
             return false;
-
         }
 
-
-
         // Close mobile menu when clicking on links
-
         document.querySelectorAll('.nav-links a').forEach(link => {
-
             link.addEventListener('click', () => {
-
                 document.getElementById('navLinks').classList.remove('active');
-
             });
-
         });
 
-
-
         // Update cart count from localStorage if available
-
         const cartCount = localStorage.getItem('cartCount') || 0;
-
         document.querySelector('.cart-count').textContent = cartCount;
-
     </script>
-
 </body>
+</html>  
 
-</html>
+
+

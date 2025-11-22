@@ -10,8 +10,12 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
 // Simple stats
 $totalProducts = $conn->query("SELECT COUNT(*) AS c FROM products")->fetch_assoc()['c'] ?? 0;
 $totalOrders   = $conn->query("SELECT COUNT(*) AS c FROM orders")->fetch_assoc()['c'] ?? 0;
-$totalSalesRow = $conn->query("SELECT SUM(total_amount) AS s FROM orders")->fetch_assoc();
+$totalSalesRow = $conn->query("SELECT SUM(total_amount) AS s FROM orders WHERE payment_status = 'successful'")->fetch_assoc();
 $totalSales    = $totalSalesRow && $totalSalesRow['s'] ? $totalSalesRow['s'] : 0;
+
+// Get pending orders count
+$pendingOrdersRow = $conn->query("SELECT COUNT(*) AS c FROM orders WHERE payment_status = 'pending'")->fetch_assoc();
+$pendingOrders = $pendingOrdersRow['c'] ?? 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -141,11 +145,26 @@ $totalSales    = $totalSalesRow && $totalSalesRow['s'] ? $totalSalesRow['s'] : 0
         }
         .badge{
             display:inline-block;
-            padding:0.2rem 0.6rem;
+            padding:0.3rem 0.7rem;
             border-radius:999px;
             font-size:0.75rem;
-            background:#E8F5E9;
-            color:#0A5033;
+            font-weight:600;
+        }
+        .badge-pending{
+            background:#FFF3CD;
+            color:#856404;
+        }
+        .badge-successful{
+            background:#D4EDDA;
+            color:#155724;
+        }
+        .badge-failed{
+            background:#F8D7DA;
+            color:#721C24;
+        }
+        .badge-cancelled{
+            background:#E2E3E5;
+            color:#383D41;
         }
         .btn{
             border:none;
@@ -158,6 +177,9 @@ $totalSales    = $totalSalesRow && $totalSalesRow['s'] ? $totalSalesRow['s'] : 0
         .btn-primary{
             background:#0A5033;
             color:#fff;
+        }
+        .btn-primary:hover{
+            background:#084028;
         }
         .btn-danger{
             background:#DC3545;
@@ -193,6 +215,15 @@ $totalSales    = $totalSalesRow && $totalSalesRow['s'] ? $totalSalesRow['s'] : 0
             display:flex;
             justify-content:flex-end;
             margin-top:0.5rem;
+        }
+        .view-link{
+            color:#0A5033;
+            text-decoration:none;
+            font-size:0.85rem;
+            font-weight:600;
+        }
+        .view-link:hover{
+            text-decoration:underline;
         }
         @media(max-width:900px){
             body{flex-direction:column;}
@@ -241,7 +272,12 @@ $totalSales    = $totalSalesRow && $totalSalesRow['s'] ? $totalSalesRow['s'] : 0
             <div class="stat-card">
                 <div class="stat-label">Total Sales</div>
                 <div class="stat-value"><?php echo number_format($totalSales, 0); ?> Frw</div>
-                <div class="stat-extra">Simulated revenue</div>
+                <div class="stat-extra">From successful payments</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending Orders</div>
+                <div class="stat-value"><?php echo (int)$pendingOrders; ?></div>
+                <div class="stat-extra">Awaiting payment confirmation</div>
             </div>
         </section>
 
@@ -290,7 +326,7 @@ $totalSales    = $totalSalesRow && $totalSalesRow['s'] ? $totalSalesRow['s'] : 0
                 <table>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Order ID</th>
                             <th>Customer</th>
                             <th>Total</th>
                             <th>Status</th>
@@ -298,31 +334,48 @@ $totalSales    = $totalSalesRow && $totalSalesRow['s'] ? $totalSalesRow['s'] : 0
                     </thead>
                     <tbody>
                         <?php
-                        $ordersRes = $conn->query("SELECT id, customer_name, total_amount, status FROM orders ORDER BY created_at DESC LIMIT 5");
+                        // FIXED QUERY - using payment_status instead of status
+                        $ordersRes = $conn->query("SELECT id, order_id, customer_name, total_amount, payment_status, created_at FROM orders ORDER BY created_at DESC LIMIT 5");
+                        
                         if ($ordersRes && $ordersRes->num_rows > 0):
                             while ($o = $ordersRes->fetch_assoc()):
+                                $status = $o['payment_status'] ?? 'pending';
+                                $badgeClass = 'badge-' . $status;
                         ?>
                         <tr>
-                            <td>#<?php echo (int)$o['id']; ?></td>
+                            <td>
+                                <a href="order_confirmation.php?order=<?php echo htmlspecialchars($o['order_id']); ?>" class="view-link">
+                                    <?php echo htmlspecialchars($o['order_id']); ?>
+                                </a>
+                            </td>
                             <td><?php echo htmlspecialchars($o['customer_name'] ?? 'Customer'); ?></td>
-                            <td><?php echo number_format($o['total_amount'], 0); ?> Frw</td>
-                            <td><span class="badge"><?php echo htmlspecialchars(ucfirst($o['status'] ?? 'pending')); ?></span></td>
+                            <td><strong><?php echo number_format($o['total_amount'], 0); ?> Frw</strong></td>
+                            <td>
+                                <span class="badge <?php echo $badgeClass; ?>">
+                                    <?php echo htmlspecialchars(ucfirst($status)); ?>
+                                </span>
+                            </td>
                         </tr>
                         <?php
                             endwhile;
                         else:
                         ?>
                         <tr>
-                            <td colspan="4">No orders yet.</td>
+                            <td colspan="4" style="text-align:center; padding: 2rem; color: #999;">
+                                No orders yet. Orders will appear here once customers start purchasing.
+                            </td>
                         </tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
+                
+                <?php if ($ordersRes && $ordersRes->num_rows > 0): ?>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <a href="admin_orders.php" class="view-link">View All Orders →</a>
+                </div>
+                <?php endif; ?>
             </div>
         </section>
     </main>
 </body>
 </html>
-
-
-

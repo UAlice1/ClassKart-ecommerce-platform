@@ -687,26 +687,7 @@ $totalItems = cartCount($cart);
                 </ul>
             </div>
 
-            <div class="footer-section">
-                <h3>Customer Service</h3>
-                <ul class="footer-links">
-                    <li><a href="#shipping">Shipping Info</a></li>
-                    <li><a href="#returns">Returns & Refunds</a></li>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Terms & Conditions</a></li>
-                    <li><a href="#support">Support Center</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Newsletter</h3>
-                <p>Subscribe to get updates on new products and exclusive offers.</p>
-                <form class="newsletter-form" onsubmit="return false;">
-                    <input type="email" placeholder="Your email" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
+          
 
         <div class="footer-bottom">
             <p>© 2025 ClassKart. All rights reserved.</p>
