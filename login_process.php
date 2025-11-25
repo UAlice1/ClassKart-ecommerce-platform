@@ -36,7 +36,7 @@ if ($adminCheck->num_rows === 0) {
     $adminCheck->close();
 }
 
-// NORMAL LOGIN (ADMIN OR CUSTOMER) FROM DATABASE
+
 $stmt = $conn->prepare("SELECT id, full_name, password, role FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
@@ -55,7 +55,7 @@ if ($stmt->num_rows === 1) {
             header("Location: admin_dashboard.php");
             exit;
         } else {
-            header("Location: index.html?login=success");
+            header("Location: index.php?login=success");
             exit;
         }
     } else {

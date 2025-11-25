@@ -435,10 +435,10 @@
                 <img src="images/logo.png" alt="ClassKart Logo">
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#shop">Shop</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php#shop">Shop</a></li>
+                <li><a href="About.php">About</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
             <div class="nav-right">
                 <input type="text" class="search-bar" placeholder="Search products...">
@@ -573,6 +573,1714 @@
     </script>
 </body>
 </html>
+
+        }
+
+
+
+        .footer-links {
+
+            list-style: none;
+
+        }
+
+
+
+        .footer-links li {
+
+            margin-bottom: 0.6rem;
+
+        }
+
+
+
+        .footer-links a {
+
+            color: #666;
+
+            text-decoration: none;
+
+            transition: all 0.3s;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .footer-links a:hover {
+
+            color: #0A5033;
+
+            padding-left: 5px;
+
+        }
+
+
+
+        .social-icons {
+
+            display: flex;
+
+            gap: 0.8rem;
+
+            margin-top: 1rem;
+
+        }
+
+
+
+        .social-icon {
+
+            width: 35px;
+
+            height: 35px;
+
+            background: #E0E0E0;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #333;
+
+            text-decoration: none;
+
+            transition: all 0.3s;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .social-icon:hover {
+
+            background: #0A5033;
+
+            color: white;
+
+            transform: translateY(-3px);
+
+        }
+
+
+
+        .newsletter-form {
+
+            display: flex;
+
+            gap: 0.5rem;
+
+            margin-top: 1rem;
+
+        }
+
+
+
+        .newsletter-form input {
+
+            flex: 1;
+
+            padding: 0.8rem 1rem;
+
+            border: 1px solid #E0E0E0;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-family: 'Poppins', sans-serif;
+
+        }
+
+
+
+        .newsletter-form input:focus {
+
+            border-color: #0A5033;
+
+        }
+
+
+
+        .newsletter-form button {
+
+            padding: 0.8rem 1.5rem;
+
+            background-color: #0A5033;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.3s;
+
+            font-family: 'Poppins', sans-serif;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+        }
+
+
+
+        .newsletter-form button:hover {
+
+            background-color: #084028;
+
+        }
+
+
+
+        .footer-bottom {
+
+            text-align: center;
+
+            padding-top: 2rem;
+
+            border-top: 1px solid #E0E0E0;
+
+            color: #666;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        /* Error Message */
+
+        .error-message {
+
+            background: #fee;
+
+            color: #c33;
+
+            padding: 0.8rem;
+
+            border-radius: 8px;
+
+            margin-bottom: 1rem;
+
+            font-size: 0.9rem;
+
+            display: none;
+
+        }
+
+
+
+        .error-message.show {
+
+            display: block;
+
+        }
+
+
+
+        /* Responsive */
+
+        @media (max-width: 768px) {
+
+            .search-bar {
+
+                width: 150px;
+
+            }
+
+
+
+            .nav-links {
+
+                gap: 1.5rem;
+
+            }
+
+
+
+            .login-card {
+
+                padding: 2rem;
+
+            }
+
+        }
+
+
+
+        @media (max-width: 480px) {
+
+            .logo img {
+
+                height: 40px;
+
+            }
+
+
+
+            .search-bar {
+
+                display: none;
+
+            }
+
+
+
+            .login-card {
+
+                padding: 1.5rem;
+
+            }
+
+
+
+            .login-header h1 {
+
+                font-size: 1.5rem;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <nav>
+
+            <div class="logo">
+
+                <img src="images/logo.png" alt="ClassKart Logo">
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="index.html#shop">Shop</a></li>
+
+                <li><a href="index.html#about">About</a></li>
+
+                <li><a href="contact.html">Contact</a></li>
+
+            </ul>
+
+            <div class="nav-right">
+
+                <input type="text" class="search-bar" placeholder="Search products...">
+
+                <div class="cart-icon">
+
+                    🛒
+
+                    <span class="cart-count">0</span>
+
+                </div>
+
+                <a href="login.html">Login</a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- Login Container -->
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <div class="login-logo">
+
+                <img src="images/logo.png" alt="ClassKart Logo">
+
+            </div>
+
+            
+
+            <div class="login-header">
+
+                <h1>Welcome Back</h1>
+
+                <p>Sign in to your ClassKart account</p>
+
+            </div>
+
+
+
+            <div class="error-message" id="errorMessage"></div>
+
+             <form id="loginForm" method="POST" action="login_process.php">
+
+
+
+                <div class="form-group">
+
+                    <label for="email">Email</label>
+
+                    <input type="email" id="email" name="email" required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="password">Password</label>
+
+                    <input type="password" id="password" name="password" required>
+
+                </div>
+
+
+
+                <div class="form-options">
+
+                    <div class="remember-me">
+
+                        <input type="checkbox" id="remember" name="remember">
+
+                        <label for="remember">Remember me</label>
+
+                    </div>
+
+                    <a href="forgot_password.html" class="forgot-password">Forgot password?</a>
+
+                </div>
+
+
+
+                <button type="submit" class="btn-signin">Sign In</button>
+
+
+
+                <div class="signup-link">
+
+                    Don't have an account? <a href="signup.html">Sign up</a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-section">
+
+                <div class="logo">
+
+                    <img src="images/logo.png" alt="ClassKart Logo" style="height: 40px; margin-bottom: 1rem;">
+
+                </div>
+
+                <p>Your One-Stop Shop for Learning. Quality educational materials for students, teachers, and parents.</p>
+
+                <div class="social-icons">
+
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="footer-section">
+
+                <h3>Quick Links</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="index.html">Shop</a></li>
+
+                    <li><a href="index.html#about">About Us</a></li>
+
+                    <li><a href="contact.html">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="footer-section">
+
+                <h3>Newsletter</h3>
+
+                <p>Subscribe to get updates on new products and exclusive offers.</p>
+
+                <form class="newsletter-form" onsubmit="return false;">
+
+                    <input type="email" placeholder="Your email" required>
+
+                    <button type="submit"><i class="fas fa-envelope"></i> Subscribe</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p>© 2025 ClassKart. All rights reserved.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script>
+
+        // Client-side form validation
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+
+            const email = document.getElementById('email').value;
+
+            const password = document.getElementById('password').value;
+
+            const errorMessage = document.getElementById('errorMessage');
+
+
+
+            // Basic validation
+
+            if (!email || !password) {
+
+                e.preventDefault();
+
+                errorMessage.textContent = 'Please fill in all fields.';
+
+                errorMessage.classList.add('show');
+
+                return false;
+
+            }
+
+
+
+            // Email format validation
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+
+                e.preventDefault();
+
+                errorMessage.textContent = 'Please enter a valid email address.';
+
+                errorMessage.classList.add('show');
+
+                return false;
+
+            }
+
+
+
+            errorMessage.classList.remove('show');
+
+        });
+
+
+
+        // Hide error message when user starts typing
+
+        document.querySelectorAll('input').forEach(input => {
+
+            input.addEventListener('input', function() {
+
+                document.getElementById('errorMessage').classList.remove('show');
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .footer-links {
+
+            list-style: none;
+
+        }
+
+
+
+        .footer-links li {
+
+            margin-bottom: 0.6rem;
+
+        }
+
+
+
+        .footer-links a {
+
+            color: #666;
+
+            text-decoration: none;
+
+            transition: all 0.3s;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .footer-links a:hover {
+
+            color: #0A5033;
+
+            padding-left: 5px;
+
+        }
+
+
+
+        .social-icons {
+
+            display: flex;
+
+            gap: 0.8rem;
+
+            margin-top: 1rem;
+
+        }
+
+
+
+        .social-icon {
+
+            width: 35px;
+
+            height: 35px;
+
+            background: #E0E0E0;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #333;
+
+            text-decoration: none;
+
+            transition: all 0.3s;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .social-icon:hover {
+
+            background: #0A5033;
+
+            color: white;
+
+            transform: translateY(-3px);
+
+        }
+
+
+
+        .newsletter-form {
+
+            display: flex;
+
+            gap: 0.5rem;
+
+            margin-top: 1rem;
+
+        }
+
+
+
+        .newsletter-form input {
+
+            flex: 1;
+
+            padding: 0.8rem 1rem;
+
+            border: 1px solid #E0E0E0;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-family: 'Poppins', sans-serif;
+
+        }
+
+
+
+        .newsletter-form input:focus {
+
+            border-color: #0A5033;
+
+        }
+
+
+
+        .newsletter-form button {
+
+            padding: 0.8rem 1.5rem;
+
+            background-color: #0A5033;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.3s;
+
+            font-family: 'Poppins', sans-serif;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+        }
+
+
+
+        .newsletter-form button:hover {
+
+            background-color: #084028;
+
+        }
+
+
+
+        .footer-bottom {
+
+            text-align: center;
+
+            padding-top: 2rem;
+
+            border-top: 1px solid #E0E0E0;
+
+            color: #666;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        /* Error Message */
+
+        .error-message {
+
+            background: #fee;
+
+            color: #c33;
+
+            padding: 0.8rem;
+
+            border-radius: 8px;
+
+            margin-bottom: 1rem;
+
+            font-size: 0.9rem;
+
+            display: none;
+
+        }
+
+
+
+        .error-message.show {
+
+            display: block;
+
+        }
+
+
+
+        /* Responsive */
+
+        @media (max-width: 768px) {
+
+            .search-bar {
+
+                width: 150px;
+
+            }
+
+
+
+            .nav-links {
+
+                gap: 1.5rem;
+
+            }
+
+
+
+            .login-card {
+
+                padding: 2rem;
+
+            }
+
+        }
+
+
+
+        @media (max-width: 480px) {
+
+            .logo img {
+
+                height: 40px;
+
+            }
+
+
+
+            .search-bar {
+
+                display: none;
+
+            }
+
+
+
+            .login-card {
+
+                padding: 1.5rem;
+
+            }
+
+
+
+            .login-header h1 {
+
+                font-size: 1.5rem;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <nav>
+
+            <div class="logo">
+
+                <img src="images/logo.png" alt="ClassKart Logo">
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="index.html#shop">Shop</a></li>
+
+                <li><a href="index.html#about">About</a></li>
+
+                <li><a href="contact.html">Contact</a></li>
+
+            </ul>
+
+            <div class="nav-right">
+
+                <input type="text" class="search-bar" placeholder="Search products...">
+
+                <div class="cart-icon">
+
+                    🛒
+
+                    <span class="cart-count">0</span>
+
+                </div>
+
+                <a href="login.html">Login</a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- Login Container -->
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <div class="login-logo">
+
+                <img src="images/logo.png" alt="ClassKart Logo">
+
+            </div>
+
+            
+
+            <div class="login-header">
+
+                <h1>Welcome Back</h1>
+
+                <p>Sign in to your ClassKart account</p>
+
+            </div>
+
+
+
+            <div class="error-message" id="errorMessage"></div>
+
+             <form id="loginForm" method="POST" action="login_process.php">
+
+
+
+                <div class="form-group">
+
+                    <label for="email">Email</label>
+
+                    <input type="email" id="email" name="email" required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="password">Password</label>
+
+                    <input type="password" id="password" name="password" required>
+
+                </div>
+
+
+
+                <div class="form-options">
+
+                    <div class="remember-me">
+
+                        <input type="checkbox" id="remember" name="remember">
+
+                        <label for="remember">Remember me</label>
+
+                    </div>
+
+                    <a href="forgot_password.html" class="forgot-password">Forgot password?</a>
+
+                </div>
+
+
+
+                <button type="submit" class="btn-signin">Sign In</button>
+
+
+
+                <div class="signup-link">
+
+                    Don't have an account? <a href="signup.html">Sign up</a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-section">
+
+                <div class="logo">
+
+                    <img src="images/logo.png" alt="ClassKart Logo" style="height: 40px; margin-bottom: 1rem;">
+
+                </div>
+
+                <p>Your One-Stop Shop for Learning. Quality educational materials for students, teachers, and parents.</p>
+
+                <div class="social-icons">
+
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="footer-section">
+
+                <h3>Quick Links</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="index.html">Shop</a></li>
+
+                    <li><a href="index.html#about">About Us</a></li>
+
+                    <li><a href="contact.html">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="footer-section">
+
+                <h3>Newsletter</h3>
+
+                <p>Subscribe to get updates on new products and exclusive offers.</p>
+
+                <form class="newsletter-form" onsubmit="return false;">
+
+                    <input type="email" placeholder="Your email" required>
+
+                    <button type="submit"><i class="fas fa-envelope"></i> Subscribe</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p>© 2025 ClassKart. All rights reserved.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script>
+
+        // Client-side form validation
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+
+            const email = document.getElementById('email').value;
+
+            const password = document.getElementById('password').value;
+
+            const errorMessage = document.getElementById('errorMessage');
+
+
+
+            // Basic validation
+
+            if (!email || !password) {
+
+                e.preventDefault();
+
+                errorMessage.textContent = 'Please fill in all fields.';
+
+                errorMessage.classList.add('show');
+
+                return false;
+
+            }
+
+
+
+            // Email format validation
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+
+                e.preventDefault();
+
+                errorMessage.textContent = 'Please enter a valid email address.';
+
+                errorMessage.classList.add('show');
+
+                return false;
+
+            }
+
+
+
+            errorMessage.classList.remove('show');
+
+        });
+
+
+
+        // Hide error message when user starts typing
+
+        document.querySelectorAll('input').forEach(input => {
+
+            input.addEventListener('input', function() {
+
+                document.getElementById('errorMessage').classList.remove('show');
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .footer-links {
+
+            list-style: none;
+
+        }
+
+
+
+        .footer-links li {
+
+            margin-bottom: 0.6rem;
+
+        }
+
+
+
+        .footer-links a {
+
+            color: #666;
+
+            text-decoration: none;
+
+            transition: all 0.3s;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .footer-links a:hover {
+
+            color: #0A5033;
+
+            padding-left: 5px;
+
+        }
+
+
+
+        .social-icons {
+
+            display: flex;
+
+            gap: 0.8rem;
+
+            margin-top: 1rem;
+
+        }
+
+
+
+        .social-icon {
+
+            width: 35px;
+
+            height: 35px;
+
+            background: #E0E0E0;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #333;
+
+            text-decoration: none;
+
+            transition: all 0.3s;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .social-icon:hover {
+
+            background: #0A5033;
+
+            color: white;
+
+            transform: translateY(-3px);
+
+        }
+
+
+
+        .newsletter-form {
+
+            display: flex;
+
+            gap: 0.5rem;
+
+            margin-top: 1rem;
+
+        }
+
+
+
+        .newsletter-form input {
+
+            flex: 1;
+
+            padding: 0.8rem 1rem;
+
+            border: 1px solid #E0E0E0;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-family: 'Poppins', sans-serif;
+
+        }
+
+
+
+        .newsletter-form input:focus {
+
+            border-color: #0A5033;
+
+        }
+
+
+
+        .newsletter-form button {
+
+            padding: 0.8rem 1.5rem;
+
+            background-color: #0A5033;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.3s;
+
+            font-family: 'Poppins', sans-serif;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+        }
+
+
+
+        .newsletter-form button:hover {
+
+            background-color: #084028;
+
+        }
+
+
+
+        .footer-bottom {
+
+            text-align: center;
+
+            padding-top: 2rem;
+
+            border-top: 1px solid #E0E0E0;
+
+            color: #666;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        /* Error Message */
+
+        .error-message {
+
+            background: #fee;
+
+            color: #c33;
+
+            padding: 0.8rem;
+
+            border-radius: 8px;
+
+            margin-bottom: 1rem;
+
+            font-size: 0.9rem;
+
+            display: none;
+
+        }
+
+
+
+        .error-message.show {
+
+            display: block;
+
+        }
+
+
+
+        /* Responsive */
+
+        @media (max-width: 768px) {
+
+            .search-bar {
+
+                width: 150px;
+
+            }
+
+
+
+            .nav-links {
+
+                gap: 1.5rem;
+
+            }
+
+
+
+            .login-card {
+
+                padding: 2rem;
+
+            }
+
+        }
+
+
+
+        @media (max-width: 480px) {
+
+            .logo img {
+
+                height: 40px;
+
+            }
+
+
+
+            .search-bar {
+
+                display: none;
+
+            }
+
+
+
+            .login-card {
+
+                padding: 1.5rem;
+
+            }
+
+
+
+            .login-header h1 {
+
+                font-size: 1.5rem;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <nav>
+
+            <div class="logo">
+
+                <img src="images/logo.png" alt="ClassKart Logo">
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="index.html#shop">Shop</a></li>
+
+                <li><a href="index.html#about">About</a></li>
+
+                <li><a href="contact.html">Contact</a></li>
+
+            </ul>
+
+            <div class="nav-right">
+
+                <input type="text" class="search-bar" placeholder="Search products...">
+
+                <div class="cart-icon">
+
+                    🛒
+
+                    <span class="cart-count">0</span>
+
+                </div>
+
+                <a href="login.html">Login</a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- Login Container -->
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <div class="login-logo">
+
+                <img src="images/logo.png" alt="ClassKart Logo">
+
+            </div>
+
+            
+
+            <div class="login-header">
+
+                <h1>Welcome Back</h1>
+
+                <p>Sign in to your ClassKart account</p>
+
+            </div>
+
+
+
+            <div class="error-message" id="errorMessage"></div>
+
+             <form id="loginForm" method="POST" action="login_process.php">
+
+
+
+                <div class="form-group">
+
+                    <label for="email">Email</label>
+
+                    <input type="email" id="email" name="email" required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="password">Password</label>
+
+                    <input type="password" id="password" name="password" required>
+
+                </div>
+
+
+
+                <div class="form-options">
+
+                    <div class="remember-me">
+
+                        <input type="checkbox" id="remember" name="remember">
+
+                        <label for="remember">Remember me</label>
+
+                    </div>
+
+                    <a href="forgot_password.html" class="forgot-password">Forgot password?</a>
+
+                </div>
+
+
+
+                <button type="submit" class="btn-signin">Sign In</button>
+
+
+
+                <div class="signup-link">
+
+                    Don't have an account? <a href="signup.html">Sign up</a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-section">
+
+                <div class="logo">
+
+                    <img src="images/logo.png" alt="ClassKart Logo" style="height: 40px; margin-bottom: 1rem;">
+
+                </div>
+
+                <p>Your One-Stop Shop for Learning. Quality educational materials for students, teachers, and parents.</p>
+
+                <div class="social-icons">
+
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="footer-section">
+
+                <h3>Quick Links</h3>
+
+                <ul class="footer-links">
+
+                    <li><a href="index.html">Shop</a></li>
+
+                    <li><a href="index.html#about">About Us</a></li>
+
+                    <li><a href="contact.html">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="footer-section">
+
+                <h3>Newsletter</h3>
+
+                <p>Subscribe to get updates on new products and exclusive offers.</p>
+
+                <form class="newsletter-form" onsubmit="return false;">
+
+                    <input type="email" placeholder="Your email" required>
+
+                    <button type="submit"><i class="fas fa-envelope"></i> Subscribe</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p>© 2025 ClassKart. All rights reserved.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script>
+
+        // Client-side form validation
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+
+            const email = document.getElementById('email').value;
+
+            const password = document.getElementById('password').value;
+
+            const errorMessage = document.getElementById('errorMessage');
+
+
+
+            // Basic validation
+
+            if (!email || !password) {
+
+                e.preventDefault();
+
+                errorMessage.textContent = 'Please fill in all fields.';
+
+                errorMessage.classList.add('show');
+
+                return false;
+
+            }
+
+
+
+            // Email format validation
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+
+                e.preventDefault();
+
+                errorMessage.textContent = 'Please enter a valid email address.';
+
+                errorMessage.classList.add('show');
+
+                return false;
+
+            }
+
+
+
+            errorMessage.classList.remove('show');
+
+        });
+
+
+
+        // Hide error message when user starts typing
+
+        document.querySelectorAll('input').forEach(input => {
+
+            input.addEventListener('input', function() {
+
+                document.getElementById('errorMessage').classList.remove('show');
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+            font-size: 0.9rem;
 
         }
 

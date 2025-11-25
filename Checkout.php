@@ -565,10 +565,10 @@ $cartEmpty = empty($items);
                 <img src="images/logo.png" alt="ClassKart Logo">
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="shop.php">Shop</a></li>
-                <li><a href="About.html">About</a></li>
-                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="About.php">About</a></li>
+                <li><a href="Contact.php">Contact</a></li>
             </ul>
             <div class="nav-right">
                 <input type="text" class="search-bar" placeholder="Search products...">
@@ -845,3 +845,4 @@ $cartEmpty = empty($items);
     </script>
 </body>
 </html>
+

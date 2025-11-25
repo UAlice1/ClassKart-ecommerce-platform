@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once 'db_connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -305,26 +310,39 @@
             margin-top: 1rem;
         }
 
-        .btn-submit:hover {
+        .btn-submit:hover:not(:disabled) {
             background-color: #084028;
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(10, 80, 51, 0.3);
         }
 
-        /* Success Message */
-        .success-message {
-            display: none;
-            background-color: #4CAF50;
-            color: white;
+        .btn-submit:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Success/Error Messages */
+        .message {
             padding: 1rem;
             border-radius: 10px;
             margin-bottom: 1.5rem;
             text-align: center;
             animation: slideDown 0.3s ease;
+            display: none;
         }
 
-        .success-message.show {
+        .message.show {
             display: block;
+        }
+
+        .success-message {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .error-message {
+            background-color: #f44336;
+            color: white;
         }
 
         @keyframes slideDown {
@@ -383,35 +401,6 @@
         .footer-links a:hover {
             color: #FFFFFF;
             padding-left: 5px;
-        }
-
-        .newsletter-form {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .newsletter-form button {
-            padding: 0.8rem 1.5rem;
-            background-color: #FFFFFF;
-            color: #0A5033;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .newsletter-form button:hover {
-            background-color: #F5F5F5;
         }
 
         .footer-bottom {
@@ -494,10 +483,6 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-
-            .newsletter-form {
-                flex-direction: column;
-            }
         }
 
         @media (max-width: 480px) {
@@ -534,10 +519,10 @@
                 <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#shop">Shop</a></li>
-                <li><a href="About.html">About</a></li>
-                <li><a href="Contact.html" class="active">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php#shop">Shop</a></li>
+                <li><a href="About.php">About</a></li>
+                <li><a href="Contact.php" class="active">Contact</a></li>
             </ul>
             <div class="nav-right">
                 <input type="text" class="search-bar" placeholder="Search products...">
@@ -572,7 +557,6 @@
                     </div>
                     
                     <div class="contact-item">
-                        
                         <div class="contact-text">
                             <h4>Email Us</h4>
                             <p>General Inquiries: info@classkart.com<br>Customer Support: support@classkart.com<br>Sales: sales@classkart.com</p>
@@ -580,7 +564,7 @@
                     </div>
                     
                     <div class="contact-item">
-                        <div class="contact-icon">TEL</div>
+                        <div class="contact-icon">📞</div>
                         <div class="contact-text">
                             <h4>Call Us</h4>
                             <p>Main Line: +250 788 123 456<br>WhatsApp: +250 790038006<br>Monday - Friday: 8:00 AM - 6:00 PM</p>
@@ -588,7 +572,6 @@
                     </div>
                     
                     <div class="contact-item">
-                    
                         <div class="contact-text">
                             <h4>Business Hours</h4>
                             <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 4:00 PM<br>Sunday: Closed</p>
@@ -599,26 +582,26 @@
             
             <div class="contact-form">
                 <h3>Send Us a Message</h3>
-                <div class="success-message" id="successMessage">
-                    Thank you! Your message has been sent successfully. We'll get back to you soon.
-                </div>
-                <form id="contactForm" onsubmit="return handleSubmit(event)">
+                <div class="message success-message" id="successMessage"></div>
+                <div class="message error-message" id="errorMessage"></div>
+                
+                <form id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
-                            <input type="text" id="firstName" name="firstName" required placeholder="your first name">
+                            <input type="text" id="firstName" name="firstName" required placeholder="Your first name">
                         </div>
                         
                         <div class="form-group">
                             <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName" required placeholder="your last ">
+                            <input type="text" id="lastName" name="lastName" required placeholder="Your last name">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required placeholder="your email ">
+                            <input type="email" id="email" name="email" required placeholder="your@email.com">
                         </div>
                         
                         <div class="form-group">
@@ -645,7 +628,7 @@
                         <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
                     </div>
                     
-                    <button type="submit" class="btn-submit">Send Message</button>
+                    <button type="submit" class="btn-submit" id="submitBtn">Send Message</button>
                 </form>
             </div>
         </div>
@@ -662,10 +645,10 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#shop">Shop</a></li>
-                    <li><a href="About.html">About Us</a></li>
-                    <li><a href="Contact.html">Contact</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="index.php#shop">Shop</a></li>
+                    <li><a href="About.php">About Us</a></li>
+                    <li><a href="Contact.php">Contact</a></li>
                 </ul>
             </div>
 
@@ -675,10 +658,7 @@
                     <li><a href="#shipping">Shipping Info</a></li>
                     <li><a href="#returns">Returns & Refunds</a></li>
                     <li><a href="#privacy">Privacy Policy</a></li>
-                 
-            </div>
-
-                
+                </ul>
             </div>
         </div>
 
@@ -694,30 +674,77 @@
             navLinks.classList.toggle('active');
         }
 
-        // Contact form submission
-        function handleSubmit(event) {
-            event.preventDefault();
+        // Contact form submission with AJAX
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            const form = event.target;
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Hide previous messages
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+            
+            // Create FormData object
             const formData = new FormData(form);
             
-            // Show success message
-            const successMessage = document.getElementById('successMessage');
-            successMessage.classList.add('show');
-            
-            // Scroll to success message
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-            // Reset form
-            form.reset();
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 5000);
-            
-            return false;
-        }
+            // Send AJAX request
+            fetch('submit_contact.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    successMessage.textContent = data.message;
+                    successMessage.classList.add('show');
+                    
+                    // Reset form
+                    form.reset();
+                    
+                    // Scroll to message
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 5000);
+                } else {
+                    // Show error message
+                    errorMessage.textContent = data.message;
+                    errorMessage.classList.add('show');
+                    
+                    // Scroll to message
+                    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        errorMessage.classList.remove('show');
+                    }, 5000);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorMessage.textContent = 'An unexpected error occurred. Please try again.';
+                errorMessage.classList.add('show');
+                
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 5000);
+            })
+            .finally(() => {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            });
+        });
 
         // Close mobile menu when clicking on links
         document.querySelectorAll('.nav-links a').forEach(link => {
@@ -731,7 +758,4 @@
         document.querySelector('.cart-count').textContent = cartCount;
     </script>
 </body>
-</html>  
-
-
-
+</html>

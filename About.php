@@ -578,7 +578,7 @@
             <img src="images/logo.png" alt="ClassKart Logo">
         </div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="shop.php">Shop</a></li>
             <li><a href="About.html" class="active">About</a></li>
             <li><a href="Contact.html">Contact</a></li>

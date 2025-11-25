@@ -609,10 +609,10 @@
                 <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="shop.php">Product</a></li>
-                <li><a href="About.html">About</a></li>
-                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="About.php">About</a></li>
+                <li><a href="Contact.php">Contact</a></li>
             </ul>
             <div class="nav-right">
                 <input type="text" class="search-bar" placeholder="Search products...">
@@ -622,6 +622,7 @@
                 </a>
                 <a href="Login.php">Login</a>
             </div>
+            
         </nav>
     </header>
 
