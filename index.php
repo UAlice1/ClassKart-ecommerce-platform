@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>ClassKart - Empowering Learning Through Access</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -594,6 +595,96 @@
                 width: 100%;
             }
         }
+        .language-switcher {
+        position: relative;
+        display: inline-block;
+    }
+
+    .language-btn {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .language-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .language-dropdown {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        display: none;
+        min-width: 150px;
+        margin-bottom: 0.5rem;
+    }
+
+    .language-dropdown.active {
+        display: block;
+    }
+
+    .language-option {
+        padding: 0.8rem 1rem;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .language-option:first-child {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .language-option:last-child {
+        border-radius: 0 0 8px 8px;
+    }
+
+    .language-option:hover {
+        background-color: #f5f5f5;
+    }
+
+    .social-media {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        text-decoration: none;
+        font-size: 1.2rem;
+    }
+
+    .social-icon:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px);
+    }
+
+    .footer-section.contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
     </style>
 </head>
 <body>
@@ -846,35 +937,251 @@
         </div>
     </section>
 
-    <!-- Professional Footer -->
-    <footer>
+    <!-- Professional Footer --><!-- Enhanced Footer with Language Switcher and Social Media -->
+<style>
+    .language-switcher {
+        position: relative;
+        display: inline-block;
+    }
+
+    .language-btn {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .language-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .language-dropdown {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        display: none;
+        min-width: 150px;
+        margin-bottom: 0.5rem;
+    }
+
+    .language-dropdown.active {
+        display: block;
+    }
+
+    .language-option {
+        padding: 0.8rem 1rem;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .language-option:first-child {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .language-option:last-child {
+        border-radius: 0 0 8px 8px;
+    }
+
+    .language-option:hover {
+        background-color: #f5f5f5;
+    }
+
+    .social-media {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        text-decoration: none;
+        font-size: 1.2rem;
+    }
+
+    .social-icon:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px);
+    }
+
+    .footer-section.contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+</style>
+
+<!-- Updated Footer HTML -->
+<footer> <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>ClassKart</h3>
-                <p>Empowering Learning Through Access. Quality educational materials for students, teachers, and parents.</p>
+                <p data-translate="footerDescription">Empowering Learning Through Access. Quality educational materials for students, teachers, and parents.</p>
+                
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <button class="language-btn" onclick="toggleLanguageDropdown()">
+                        <span id="currentLanguage">🇬🇧 English</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <div class="language-option" onclick="changeLanguage('en')">
+                            🇬🇧 English
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            🇫🇷 Français
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('rw')">
+                            🇷🇼 Kinyarwanda
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="footer-section">
-                <h3>Quick Links</h3>
+                <h3 data-translate="quickLinks">Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#shop">Shop</a></li>
-                    <li><a href="About.html">About Us</a></li>
-                    <li><a href="Contact.html">Contact</a></li>
+                    <li><a href="index.php" data-translate="home">Home</a></li>
+                    <li><a href="shop.php" data-translate="shop">Shop</a></li>
+                    <li><a href="About.php" data-translate="about">About Us</a></li>
+                    <li><a href="Contact.php" data-translate="contact">Contact</a></li>
                 </ul>
             </div>
 
-          
-
-           
+            <div class="footer-section contact-info">
+                <h3 data-translate="connectWithUs">Connect With Us</h3>
+                <div class="social-media">
+                    <a href="https://wa.me/250790038006" target="_blank" class="social-icon" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.instagram.com/trix.alice?igsh=Z2YxYWwxc2NjdW1p" target="_blank" class="social-icon" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/alice-umubyeyii-554205273" target="_blank" class="social-icon" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="footer-bottom">
-            <p>© 2025 ClassKart. All rights reserved. | Alice & Fidele</p>
+            <p>© 2025 ClassKart. <span data-translate="allRights">All rights reserved</span>. | Alice & Fidele</p>
         </div>
     </footer>
 
     <script>
+        // Translation dictionary
+        const translations = {
+            en: {
+                footerDescription: "Empowering Learning Through Access. Quality educational materials for students, teachers, and parents.",
+                quickLinks: "Quick Links",
+                home: "Home",
+                shop: "Shop",
+                about: "About Us",
+                contact: "Contact",
+                connectWithUs: "Connect With Us",
+                allRights: "All rights reserved"
+            },
+            fr: {
+                footerDescription: "Autonomiser l'apprentissage par l'accès. Matériel pédagogique de qualité pour les étudiants, les enseignants et les parents.",
+                quickLinks: "Liens Rapides",
+                home: "Accueil",
+                shop: "Boutique",
+                about: "À Propos",
+                contact: "Contact",
+                connectWithUs: "Connectez-vous avec nous",
+                allRights: "Tous droits réservés"
+            },
+            rw: {
+                footerDescription: "Gutera inkunga kwiga binyuze mu kubona. Ibikoresho byiga byiza kubanyeshuri, abarimu, na ba nyir'ababana.",
+                quickLinks: "Ihuza Byihuse",
+                home: "Ahabanza",
+                shop: "Iduka",
+                about: "Kuri Twe",
+                contact: "Twandikire",
+                connectWithUs: "Duhuze",
+                allRights: "Uburenganzira bwose burarinzwe"
+            }
+        };
+
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLanguage(langCode) {
+            const langMap = {
+                'en': '🇬🇧 English',
+                'fr': '🇫🇷 Français',
+                'rw': '🇷🇼 Kinyarwanda'
+            };
+            
+            document.getElementById('currentLanguage').textContent = langMap[langCode];
+            document.getElementById('languageDropdown').classList.remove('active');
+            
+            // Store language preference
+            localStorage.setItem('selectedLanguage', langCode);
+            
+            // Apply translations
+            applyTranslations(langCode);
+        }
+
+        function applyTranslations(langCode) {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[langCode] && translations[langCode][key]) {
+                    element.textContent = translations[langCode][key];
+                }
+            });
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.language-switcher')) {
+                document.getElementById('languageDropdown').classList.remove('active');
+            }
+        });
+
+        // Load saved language preference
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('selectedLanguage');
+            if (savedLang) {
+                const langMap = {
+                    'en': '🇬🇧 English',
+                    'fr': '🇫🇷 Français',
+                    'rw': '🇷🇼 Kinyarwanda'
+                };
+                if (langMap[savedLang]) {
+                    document.getElementById('currentLanguage').textContent = langMap[savedLang];
+                    applyTranslations(savedLang);
+                }
+            }
+        });
+   
+        // Store language preference
+
+
        
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');

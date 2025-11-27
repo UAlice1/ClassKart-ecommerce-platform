@@ -297,10 +297,10 @@ $cartCount = getCartCount();
                 <img src="images/logo.png" alt="ClassKart Logo">
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="shop.php">Shop</a></li>
-                <li><a href="About.html">About</a></li>
-                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="About.php">About</a></li>
+                <li><a href="Contact.php">Contact</a></li>
             </ul>
             <div class="nav-right">
                 <input type="text" class="search-bar" placeholder="Search products...">
@@ -371,10 +371,10 @@ $cartCount = getCartCount();
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="shop.php">Shop</a></li>
-                    <li><a href="About.html">About Us</a></li>
-                    <li><a href="Contact.html">Contact</a></li>
+                    <li><a href="About.php">About Us</a></li>
+                    <li><a href="Contact.php">Contact</a></li>
                 </ul>
             </div>
             
@@ -384,6 +384,7 @@ $cartCount = getCartCount();
     </footer>
 </body>
 </html>
+
 
 
 
